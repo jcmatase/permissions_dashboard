@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
-import { MatDialog, MatDialogConfig } from '@angular/material';
-import { MyDialogComponent } from '../my-dialog/my-dialog.component';
+import { MatDialog, MatDialogConfig, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { AddUserComponent } from '../modals/add-user/add-user.component';
 
 @Component({
   selector: 'users-list',
@@ -55,23 +55,29 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  openModal() {
+  openAddUserModal() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.width = "350px";
+    dialogConfig.height = "280px";
     dialogConfig.data = {
       id: 1,
-      title: "Angular For Beginners"
+      title: "Add a new user"
     };
-    const dialogRef = this.dialog.open(MyDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(AddUserComponent, dialogConfig);
     dialogConfig.position = {
       top: '0',
       left: '0'
-  };
-    dialogRef.afterClosed().subscribe(result => {
-      console.log("Dialog was closed");
-      console.log(result)
-    });
-  }
+    };
 
+    dialogRef.afterClosed().subscribe(result => {
+    });
+
+    dialogRef.backdropClick().subscribe(_ => {
+      dialogRef.close();
+    });
+
+  }
+  
 }

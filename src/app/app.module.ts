@@ -8,9 +8,13 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { MyDialogComponent } from './my-dialog/my-dialog.component';
 
-import { MatDialogModule, MatButtonModule } from '@angular/material';
+
+
+// Modals
+import { AddUserComponent } from '../app/modals/add-user/add-user.component';
+
+import { MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 
 
 @NgModule({
@@ -21,7 +25,7 @@ import { MatDialogModule, MatButtonModule } from '@angular/material';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
-    MatDialogModule, MatButtonModule,
+    MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule,
     NgbModule.forRoot()
   ],
   schemas: [ 
@@ -30,13 +34,13 @@ import { MatDialogModule, MatButtonModule } from '@angular/material';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    MyDialogComponent    
+    AddUserComponent
   ],
   providers: [
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    MyDialogComponent
+    AddUserComponent
   ]
 })
 export class AppModule { }

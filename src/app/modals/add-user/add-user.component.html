@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>{{modalTitle}}</h2>
+<mat-dialog-content>
+
+<form class="add-user-form">
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input #usernameInput matInput placeholder="username">
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input #passwordInput matInput placeholder="password" type="password">
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+  
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+ <button mat-button mat-dialog-close>Close</button>
+ <button mat-button mat-raised-button color="primary" (click)="startSavingUser(usernameInput, passwordInput)">Add</button>
+</mat-dialog-actions>
