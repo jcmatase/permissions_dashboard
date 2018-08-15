@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MyDialogComponent } from '../my-dialog/my-dialog.component';
 
 @Component({
   selector: 'users-list',
@@ -12,7 +14,7 @@ export class UsersComponent implements OnInit {
 
   users: Array<any>;
 
-  constructor(private toastr: ToastrService) { }
+  constructor(private toastr: ToastrService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.setTestData();
@@ -52,4 +54,24 @@ export class UsersComponent implements OnInit {
       positionClass: 'toast-' + from + '-' +  align
     });
   }
+
+  openModal() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id: 1,
+      title: "Angular For Beginners"
+    };
+    const dialogRef = this.dialog.open(MyDialogComponent, dialogConfig);
+    dialogConfig.position = {
+      top: '0',
+      left: '0'
+  };
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("Dialog was closed");
+      console.log(result)
+    });
+  }
+
 }

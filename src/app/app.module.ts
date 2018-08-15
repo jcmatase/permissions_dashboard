@@ -8,8 +8,9 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { MyDialogComponent } from './my-dialog/my-dialog.component';
 
-
+import { MatDialogModule, MatButtonModule } from '@angular/material';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    MatDialogModule, MatButtonModule,
     NgbModule.forRoot()
   ],
   schemas: [ 
@@ -27,10 +29,14 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
   ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent    
+    AdminLayoutComponent,
+    MyDialogComponent    
   ],
   providers: [
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    MyDialogComponent
+  ]
 })
 export class AppModule { }
