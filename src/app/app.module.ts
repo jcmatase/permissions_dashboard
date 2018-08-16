@@ -13,6 +13,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 
 // Modals
 import { AddUserComponent } from '../app/modals/add-user/add-user.component';
+import { RemoveUserComponent } from '../app/modals/remove-user/remove-user.component';
 
 import { MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 
@@ -34,13 +35,13 @@ import { MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule } 
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AddUserComponent
+    AddUserComponent, RemoveUserComponent
   ],
   providers: [
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    AddUserComponent
+    AddUserComponent, RemoveUserComponent
   ]
 })
 export class AppModule { }

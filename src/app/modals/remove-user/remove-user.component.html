@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>{{ modalTitle }}</h2>
+<span class="removeUserName">{{ user.username }}</span>
+<mat-dialog-content>
+</mat-dialog-content>
+<mat-dialog-actions>
+ <button mat-button mat-dialog-close>No</button>
+ <button mat-button mat-raised-button color="primary" class="removeUserBtn" (click)="startRemovingUser()">Yes</button>
+</mat-dialog-actions>

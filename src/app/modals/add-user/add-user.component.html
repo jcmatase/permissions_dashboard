@@ -17,11 +17,18 @@
         </mat-form-field>
       </td>
     </tr>
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input #nameInput matInput placeholder="name">
+        </mat-form-field>
+      </td>
+    </tr>
   </table>
   
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
  <button mat-button mat-dialog-close>Close</button>
- <button mat-button mat-raised-button color="primary" (click)="startSavingUser(usernameInput, passwordInput)">Add</button>
+ <button mat-button mat-raised-button color="primary" (click)="startSavingUser(usernameInput, passwordInput, nameInput)">Add</button>
 </mat-dialog-actions>

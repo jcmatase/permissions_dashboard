@@ -19,6 +19,7 @@
               <thead class=" text-primary">
                 <th>username</th>
                 <th>password</th>
+                <th>name</th>
                 <th>edit</th>
                 <th>roles</th>
                 <th>permissions</th>
@@ -28,6 +29,7 @@
                 <tr>
                   <td>{{ user.username }}</td>
                   <td>{{ user.password }}</td>
+                  <td>{{ user.name }}</td>
                   <td>
                     <button class="btn clean-button now-ui-icons ui-1_settings-gear-63"></button>
                   </td>
@@ -38,7 +40,7 @@
                     <button class="btn clean-button now-ui-icons users_circle-08"></button>
                   </td>
                   <td>
-                    <button class="btn clean-button now-ui-icons ui-1_simple-remove"></button>
+                    <button class="btn clean-button now-ui-icons ui-1_simple-remove" (click)="openRemoveUserModal(user)"></button>
                   </td>
                 </tr>
               </tbody>

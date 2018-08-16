@@ -18,10 +18,11 @@ export class AddUserComponent implements OnInit {
   ngOnInit() {
   }
 
-  startSavingUser(pUserNameInput, pPasswordInput) {
+  startSavingUser(pUserNameInput, pPasswordInput, pNameInput) {
     this.newUser = {
         "username" : pUserNameInput.value,
-        "passwod" : pPasswordInput.value
+        "password" : pPasswordInput.value,
+        "name" : pNameInput.value
     };
     this.printUserInfo();
   }
