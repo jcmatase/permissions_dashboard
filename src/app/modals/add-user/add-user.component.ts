@@ -33,7 +33,8 @@ export class AddUserComponent implements OnInit {
     var httpResultMsg = " was added.";
     var notificationObj = {
         "user" : this.newUser,
-        "msgStatus" : httpResultMsg
+        "msgStatus" : httpResultMsg,
+        "classType" : "alert alert-success alert-with-icon"
     };
     this.onAddEvn.emit(notificationObj);
   }

@@ -33,7 +33,7 @@
                   <td>{{ user.password }}</td>
                   <td>{{ user.name }}</td>
                   <td>
-                    <button class="btn clean-button now-ui-icons ui-1_settings-gear-63"></button>
+                    <button class="btn clean-button now-ui-icons ui-1_settings-gear-63" (click)="openEditUserModal(user)"></button>
                   </td>
                   <td>
                     <button class="btn clean-button now-ui-icons users_single-02" (click)="openEditRolesModal(user)"></button>

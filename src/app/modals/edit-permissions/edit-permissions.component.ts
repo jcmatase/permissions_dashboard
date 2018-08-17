@@ -51,7 +51,8 @@ export class EditPermissionsComponent {
       var httpResultMsg = " was updated.";
       var notificationObj = {
           "permissionName" : this.clickedPermission["name"],
-          "msgStatus" : httpResultMsg
+          "msgStatus" : httpResultMsg,
+          "classType" : "alert alert-success alert-with-icon"
       };
       this.onUpdatePermission.emit(notificationObj);
   }

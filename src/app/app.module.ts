@@ -1,6 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -16,11 +16,12 @@ import { AddUserComponent } from '../app/modals/add-user/add-user.component';
 import { RemoveUserComponent } from '../app/modals/remove-user/remove-user.component';
 import { EditPermissionsComponent } from '../app/modals/edit-permissions/edit-permissions.component';
 import { EditRolesComponent } from '../app/modals/edit-roles/edit-roles.component';
+import { EditUserComponent } from '../app/modals/edit-user/edit-user.component';
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
-    FormsModule,
+    FormsModule, ReactiveFormsModule,
     HttpModule,
     ComponentsModule,
     RouterModule,
@@ -34,13 +35,13 @@ import { EditRolesComponent } from '../app/modals/edit-roles/edit-roles.componen
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AddUserComponent, RemoveUserComponent, EditPermissionsComponent, EditRolesComponent
+    AddUserComponent, RemoveUserComponent, EditPermissionsComponent, EditRolesComponent, EditUserComponent
   ],
   providers: [
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    AddUserComponent, RemoveUserComponent, EditPermissionsComponent, EditRolesComponent
+    AddUserComponent, RemoveUserComponent, EditPermissionsComponent, EditRolesComponent, EditUserComponent
   ]
 })
 export class AppModule { }

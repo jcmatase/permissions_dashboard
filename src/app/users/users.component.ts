@@ -6,6 +6,7 @@ import { AddUserComponent } from '../modals/add-user/add-user.component';
 import { RemoveUserComponent } from '../modals/remove-user/remove-user.component';
 import { EditPermissionsComponent } from '../modals/edit-permissions/edit-permissions.component';
 import { EditRolesComponent } from '../modals/edit-roles/edit-roles.component';
+import { EditUserComponent } from '../modals/edit-user/edit-user.component';
 
 @Component({
   selector: 'users-list',
@@ -58,13 +59,14 @@ export class UsersComponent implements OnInit {
     ];
   }
 
-  private showNotification(from, align, msg1, boldMsg, msg2) {
+  private showNotification(from, align, msg1, boldMsg, msg2, classType) {
     this.toastr.success('<span class="now-ui-icons ui-1_bell-53"></span>' + msg1 + '<b>' + boldMsg + '</b> ' + msg2 , '', {
       timeOut: 2000,
       closeButton: true,
       enableHtml: true,
-      toastClass: "alert alert-success alert-with-icon",
+      toastClass: classType,
       positionClass: 'toast-' + from + '-' +  align
+      //toastClass: "alert alert-success alert-with-icon",
     });
   }
 
@@ -116,7 +118,7 @@ export class UsersComponent implements OnInit {
 
     dialogRef.componentInstance.onAddEvn.subscribe(notificationObj => {
       this.addUserToArray(notificationObj["user"]);
-      this.showNotification('top', 'right', "User: ", notificationObj["user"]["name"], notificationObj["msgStatus"]);
+      this.showNotification('top', 'right', "User: ", notificationObj["user"]["name"], notificationObj["msgStatus"], notificationObj["classType"]);
       dialogRef.close();
     });
   }
@@ -156,7 +158,7 @@ export class UsersComponent implements OnInit {
 
     dialogRef.componentInstance.onRemoveEvn.subscribe(notificationObj => {
       this.removeUserFromArray(notificationObj["id"]);
-      this.showNotification('top', 'right', "User: ", notificationObj["userName"], notificationObj["msgStatus"]);
+      this.showNotification('top', 'right', "User: ", notificationObj["userName"], notificationObj["msgStatus"], notificationObj["classType"]);
       dialogRef.close();
     });
   }
@@ -191,7 +193,7 @@ export class UsersComponent implements OnInit {
     });
 
     dialogRef.componentInstance.onUpdatePermission.subscribe(notificationObj => {
-      this.showNotification('top', 'right', "Permission: ", notificationObj["permissionName"], notificationObj["msgStatus"]);
+      this.showNotification('top', 'right', "Permission: ", notificationObj["permissionName"], notificationObj["msgStatus"], notificationObj["classType"]);
     });
 
     dialogRef.backdropClick().subscribe(_ => {
@@ -230,7 +232,46 @@ export class UsersComponent implements OnInit {
     });
 
     dialogRef.componentInstance.onUpdateRole.subscribe(notificationValue => {
-      this.showNotification('top', 'right', "Role: ", notificationValue["roleName"], notificationValue["msgStatus"]);
+      this.showNotification('top', 'right', "Role: ", notificationValue["roleName"], notificationValue["msgStatus"], notificationValue["classType"]);
+    });
+
+    dialogRef.backdropClick().subscribe(_ => {
+      dialogRef.close();
+    });
+  }
+
+  //    ______    _ _ _     _    _                 __  __           _       _ 
+  //   |  ____|  | (_) |   | |  | |               |  \/  |         | |     | |
+  //   | |__   __| |_| |_  | |  | |___  ___ _ __  | \  / | ___   __| | __ _| |
+  //   |  __| / _` | | __| | |  | / __|/ _ \ '__| | |\/| |/ _ \ / _` |/ _` | |
+  //   | |___| (_| | | |_  | |__| \__ \  __/ |    | |  | | (_) | (_| | (_| | |
+  //   |______\__,_|_|\__|  \____/|___/\___|_|    |_|  |_|\___/ \__,_|\__,_|_|
+  //                                                                          
+  //                                                                          
+
+  openEditUserModal(pUser) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "395px";
+    dialogConfig.height = "315px";
+    dialogConfig.data = {
+      id: 3,
+      title: "Edit User: ",
+      user: pUser
+    };
+    const dialogRef = this.removeUserDialog.open(EditUserComponent, dialogConfig);
+    dialogConfig.position = {
+      top: '0',
+      left: '0'
+    };
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+
+    dialogRef.componentInstance.onUpdateUser.subscribe(notificationValue => {
+      this.showNotification('top', 'right', "User: ", notificationValue["username"], notificationValue["msgStatus"], notificationValue["classType"]);
+      dialogRef.close();
     });
 
     dialogRef.backdropClick().subscribe(_ => {

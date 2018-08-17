@@ -48,7 +48,8 @@ export class EditRolesComponent {
       var httpResultMsg = " was updated.";
       var notificationObj = {
           "roleName" : this.clickedRole["name"],
-          "msgStatus" : httpResultMsg
+          "msgStatus" : httpResultMsg,
+          "classType" : "alert alert-success alert-with-icon"
       };
       this.onUpdateRole.emit(notificationObj);
   }

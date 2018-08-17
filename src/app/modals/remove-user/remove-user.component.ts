@@ -30,7 +30,8 @@ export class RemoveUserComponent implements OnInit {
     var notificationObj = {
         "id" : this.user["id"],
         "userName" : this.user["name"],
-        "msgStatus" : httpResultMsg
+        "msgStatus" : httpResultMsg,
+        "classType" : "alert alert-success alert-with-icon"
     };
     this.onRemoveEvn.emit(notificationObj);
   }
