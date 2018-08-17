@@ -15,6 +15,7 @@ import { MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule, M
 import { AddUserComponent } from '../app/modals/add-user/add-user.component';
 import { RemoveUserComponent } from '../app/modals/remove-user/remove-user.component';
 import { EditPermissionsComponent } from '../app/modals/edit-permissions/edit-permissions.component';
+import { EditRolesComponent } from '../app/modals/edit-roles/edit-roles.component';
 
 @NgModule({
   imports: [
@@ -33,13 +34,13 @@ import { EditPermissionsComponent } from '../app/modals/edit-permissions/edit-pe
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AddUserComponent, RemoveUserComponent, EditPermissionsComponent
+    AddUserComponent, RemoveUserComponent, EditPermissionsComponent, EditRolesComponent
   ],
   providers: [
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    AddUserComponent, RemoveUserComponent, EditPermissionsComponent
+    AddUserComponent, RemoveUserComponent, EditPermissionsComponent, EditRolesComponent
   ]
 })
 export class AppModule { }

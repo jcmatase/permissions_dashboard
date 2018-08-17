@@ -24,7 +24,7 @@ export class EditPermissionsComponent {
 
   ngOnInit() {
     this.displayedColumns = ['id', 'name', 'grant', 'deny'];
-    this.setTestData();
+    this.setPermissionsInfo();
     this.dataSource = new MatTableDataSource(this.permissions);
   }
 
@@ -32,7 +32,7 @@ export class EditPermissionsComponent {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  private setTestData() {
+  private setPermissionsInfo() {
     this.permissions = [
         {id: 1, name: 'view_gateway', grant: true, deny: false},
         {id: 2, name: 'edit_gateway', grant: false, deny: true},
@@ -48,7 +48,12 @@ export class EditPermissionsComponent {
       console.dir(this.clickedPermission);
       // Query db to update permission.
       // Show success or fail notificaction
-      this.onUpdatePermission.emit(this.clickedPermission["name"]);
+      var httpResultMsg = " was updated.";
+      var notificationObj = {
+          "permissionName" : this.clickedPermission["name"],
+          "msgStatus" : httpResultMsg
+      };
+      this.onUpdatePermission.emit(notificationObj);
   }
 
   setClickedPermission(pRow){

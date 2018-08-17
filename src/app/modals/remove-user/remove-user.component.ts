@@ -24,9 +24,15 @@ export class RemoveUserComponent implements OnInit {
   startRemovingUser() {
     console.log("remove user: ");
     console.log(this.user);
-    // Query db to update permission.
+    // Query db to remove user.
     // Show success or fail notificaction
-    this.onRemoveEvn.emit(this.user["name"]);
+    var httpResultMsg = " was removed.";
+    var notificationObj = {
+        "id" : this.user["id"],
+        "userName" : this.user["name"],
+        "msgStatus" : httpResultMsg
+    };
+    this.onRemoveEvn.emit(notificationObj);
   }
 
 }

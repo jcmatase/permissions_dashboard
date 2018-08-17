@@ -5,6 +5,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddUserComponent } from '../modals/add-user/add-user.component';
 import { RemoveUserComponent } from '../modals/remove-user/remove-user.component';
 import { EditPermissionsComponent } from '../modals/edit-permissions/edit-permissions.component';
+import { EditRolesComponent } from '../modals/edit-roles/edit-roles.component';
 
 @Component({
   selector: 'users-list',
@@ -19,37 +20,37 @@ export class UsersComponent implements OnInit {
   constructor(private toastr: ToastrService, public dialog: MatDialog, public removeUserDialog: MatDialog) { }
 
   ngOnInit() {
-    this.setTestData();
+    this.setUsersInfo();
   }
 
-  private setTestData(){
+  private setUsersInfo(){
     this.users = [
       {
-          "user_id" : 1,
+          "id" : 1,
           "username" : "jean.mata@bvmedia.cr",
           "password" : "ojaisbt67tr751397Jgs74rhBf",
           "name" : "Jean Carlo Mata"
       },
       {
-          "user_id" : 2,
+          "id" : 2,
           "username" : "ariel@onpoint.com",
           "password" : "jajsJHVhvjhgsvjJSCJhv871872613b",
           "name" : "Ariel Dayan"
       },
       {
-          "user_id" : 3,
+          "id" : 3,
           "username" : "chucky@onpoint.com",
           "password" : "ojaisbt67tr751397Jgs74rhBf",
           "name" : "Charles Ohana"
       },
       {
-          "user_id" : 4,
+          "id" : 4,
           "username" : "mainor.miranda@bvmedia.cr",
           "password" : "ojaisbt67tr751397Jgs74rhBf",
           "name" : "Mainor Miranda"
       },
       {
-          "user_id" : 4,
+          "id" : 5,
           "username" : "charlie@onpoint.com",
           "password" : "ojaisbt67tr751397Jgs74rhBf",
           "name" : "Charlie Brown"
@@ -57,7 +58,7 @@ export class UsersComponent implements OnInit {
     ];
   }
 
-  showNotification(from, align, msg1, boldMsg, msg2) {
+  private showNotification(from, align, msg1, boldMsg, msg2) {
     this.toastr.success('<span class="now-ui-icons ui-1_bell-53"></span>' + msg1 + '<b>' + boldMsg + '</b> ' + msg2 , '', {
       timeOut: 2000,
       closeButton: true,
@@ -65,6 +66,19 @@ export class UsersComponent implements OnInit {
       toastClass: "alert alert-success alert-with-icon",
       positionClass: 'toast-' + from + '-' +  align
     });
+  }
+
+  private removeUserFromArray(id) {
+    for(var userCounter = 0; userCounter < this.users.length; userCounter++){
+      if(this.users[userCounter]["id"] === id){
+        this.users.splice(userCounter, 1);
+        return;
+      }
+    }
+  }
+
+  private addUserToArray(newUser) {
+    this.users.push(newUser);
   }
 
 
@@ -97,6 +111,12 @@ export class UsersComponent implements OnInit {
     });
 
     dialogRef.backdropClick().subscribe(_ => {
+      dialogRef.close();
+    });
+
+    dialogRef.componentInstance.onAddEvn.subscribe(notificationObj => {
+      this.addUserToArray(notificationObj["user"]);
+      this.showNotification('top', 'right', "User: ", notificationObj["user"]["name"], notificationObj["msgStatus"]);
       dialogRef.close();
     });
   }
@@ -134,8 +154,9 @@ export class UsersComponent implements OnInit {
       dialogRef.close();
     });
 
-    dialogRef.componentInstance.onRemoveEvn.subscribe(userName => {
-      this.showNotification('top', 'right', "User: ", userName, " was removed");
+    dialogRef.componentInstance.onRemoveEvn.subscribe(notificationObj => {
+      this.removeUserFromArray(notificationObj["id"]);
+      this.showNotification('top', 'right', "User: ", notificationObj["userName"], notificationObj["msgStatus"]);
       dialogRef.close();
     });
   }
@@ -169,13 +190,52 @@ export class UsersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
 
-    dialogRef.componentInstance.onUpdatePermission.subscribe(permissionName => {
-      this.showNotification('top', 'right', "Permission: ", permissionName, " was updated");
+    dialogRef.componentInstance.onUpdatePermission.subscribe(notificationObj => {
+      this.showNotification('top', 'right', "Permission: ", notificationObj["permissionName"], notificationObj["msgStatus"]);
     });
 
     dialogRef.backdropClick().subscribe(_ => {
       dialogRef.close();
     });
   }
+
+  //    ______    _ _ _     _____       _             __  __           _       _ 
+  //   |  ____|  | (_) |   |  __ \     | |           |  \/  |         | |     | |
+  //   | |__   __| |_| |_  | |__) |___ | | ___  ___  | \  / | ___   __| | __ _| |
+  //   |  __| / _` | | __| |  _  // _ \| |/ _ \/ __| | |\/| |/ _ \ / _` |/ _` | |
+  //   | |___| (_| | | |_  | | \ \ (_) | |  __/\__ \ | |  | | (_) | (_| | (_| | |
+  //   |______\__,_|_|\__| |_|  \_\___/|_|\___||___/ |_|  |_|\___/ \__,_|\__,_|_|
+  //                                                                             
+  //                                                                             
+
   
+  openEditRolesModal(pUser) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "600px";
+    dialogConfig.height = "400px";
+    dialogConfig.data = {
+      id: 3,
+      title: "User Roles for: ",
+      user: pUser
+    };
+    const dialogRef = this.removeUserDialog.open(EditRolesComponent, dialogConfig);
+    dialogConfig.position = {
+      top: '0',
+      left: '0'
+    };
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+
+    dialogRef.componentInstance.onUpdateRole.subscribe(notificationValue => {
+      this.showNotification('top', 'right', "Role: ", notificationValue["roleName"], notificationValue["msgStatus"]);
+    });
+
+    dialogRef.backdropClick().subscribe(_ => {
+      dialogRef.close();
+    });
+  }
+
 }
