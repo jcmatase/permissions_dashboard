@@ -8,15 +8,13 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-
+import { MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatCheckboxModule} from '@angular/material';
 
 
 // Modals
 import { AddUserComponent } from '../app/modals/add-user/add-user.component';
 import { RemoveUserComponent } from '../app/modals/remove-user/remove-user.component';
-
-import { MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
-
+import { EditPermissionsComponent } from '../app/modals/edit-permissions/edit-permissions.component';
 
 @NgModule({
   imports: [
@@ -26,7 +24,7 @@ import { MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule } 
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
-    MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule,
+    MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatCheckboxModule,
     NgbModule.forRoot()
   ],
   schemas: [ 
@@ -35,13 +33,13 @@ import { MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule } 
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AddUserComponent, RemoveUserComponent
+    AddUserComponent, RemoveUserComponent, EditPermissionsComponent
   ],
   providers: [
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    AddUserComponent, RemoveUserComponent
+    AddUserComponent, RemoveUserComponent, EditPermissionsComponent
   ]
 })
 export class AppModule { }

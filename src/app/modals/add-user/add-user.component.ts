@@ -24,6 +24,8 @@ export class AddUserComponent implements OnInit {
         "password" : pPasswordInput.value,
         "name" : pNameInput.value
     };
+    // Query db to add user
+    // If success add user to users table and show notification
     this.printUserInfo();
   }
 

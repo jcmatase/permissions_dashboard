@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
-import { MatDialog, MatDialogConfig, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddUserComponent } from '../modals/add-user/add-user.component';
 import { RemoveUserComponent } from '../modals/remove-user/remove-user.component';
+import { EditPermissionsComponent } from '../modals/edit-permissions/edit-permissions.component';
 
 @Component({
   selector: 'users-list',
@@ -56,16 +57,26 @@ export class UsersComponent implements OnInit {
     ];
   }
 
-  showNotification(from, align) {
-    this.toastr.success('<span class="now-ui-icons ui-1_bell-53"></span> Welcome to <b>Now Ui Dashboard</b> - a beautiful freebie for every web developer.', '', {
-      timeOut: 8000,
+  showNotification(from, align, msg1, boldMsg, msg2) {
+    this.toastr.success('<span class="now-ui-icons ui-1_bell-53"></span>' + msg1 + '<b>' + boldMsg + '</b> ' + msg2 , '', {
+      timeOut: 2000,
       closeButton: true,
       enableHtml: true,
-      toastClass: "alert alert-info alert-with-icon",
+      toastClass: "alert alert-success alert-with-icon",
       positionClass: 'toast-' + from + '-' +  align
     });
   }
 
+
+  //                _     _   _    _                 __  __           _       _ 
+  //       /\      | |   | | | |  | |               |  \/  |         | |     | |
+  //      /  \   __| | __| | | |  | |___  ___ _ __  | \  / | ___   __| | __ _| |
+  //     / /\ \ / _` |/ _` | | |  | / __|/ _ \ '__| | |\/| |/ _ \ / _` |/ _` | |
+  //    / ____ \ (_| | (_| | | |__| \__ \  __/ |    | |  | | (_) | (_| | (_| | |
+  //   /_/    \_\__,_|\__,_|  \____/|___/\___|_|    |_|  |_|\___/ \__,_|\__,_|_|
+  //                                                                            
+  //                                                                            
+  
   openAddUserModal() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -90,6 +101,15 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  //    _____                                 _    _                 __  __           _       _ 
+  //   |  __ \                               | |  | |               |  \/  |         | |     | |
+  //   | |__) |___ _ __ ___   _____   _____  | |  | |___  ___ _ __  | \  / | ___   __| | __ _| |
+  //   |  _  // _ \ '_ ` _ \ / _ \ \ / / _ \ | |  | / __|/ _ \ '__| | |\/| |/ _ \ / _` |/ _` | |
+  //   | | \ \  __/ | | | | | (_) \ V /  __/ | |__| \__ \  __/ |    | |  | | (_) | (_| | (_| | |
+  //   |_|  \_\___|_| |_| |_|\___/ \_/ \___|  \____/|___/\___|_|    |_|  |_|\___/ \__,_|\__,_|_|
+  //                                                                                            
+  //                                                                                            
+
   openRemoveUserModal(pUser) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -108,6 +128,49 @@ export class UsersComponent implements OnInit {
     };
 
     dialogRef.afterClosed().subscribe(result => {
+    });
+
+    dialogRef.backdropClick().subscribe(_ => {
+      dialogRef.close();
+    });
+
+    dialogRef.componentInstance.onRemoveEvn.subscribe(userName => {
+      this.showNotification('top', 'right', "User: ", userName, " was removed");
+      dialogRef.close();
+    });
+  }
+  
+  //    ______    _ _ _     _____                    _         _                   __  __           _       _ 
+  //   |  ____|  | (_) |   |  __ \                  (_)       (_)                 |  \/  |         | |     | |
+  //   | |__   __| |_| |_  | |__) |__ _ __ _ __ ___  _ ___ ___ _  ___  _ __  ___  | \  / | ___   __| | __ _| |
+  //   |  __| / _` | | __| |  ___/ _ \ '__| '_ ` _ \| / __/ __| |/ _ \| '_ \/ __| | |\/| |/ _ \ / _` |/ _` | |
+  //   | |___| (_| | | |_  | |  |  __/ |  | | | | | | \__ \__ \ | (_) | | | \__ \ | |  | | (_) | (_| | (_| | |
+  //   |______\__,_|_|\__| |_|   \___|_|  |_| |_| |_|_|___/___/_|\___/|_| |_|___/ |_|  |_|\___/ \__,_|\__,_|_|
+  //                                                                                                          
+  //                                                                                                          
+
+  openEditPermissionsModal(pUser) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "600px";
+    dialogConfig.height = "400px";
+    dialogConfig.data = {
+      id: 3,
+      title: "User Permissions for: ",
+      user: pUser
+    };
+    const dialogRef = this.removeUserDialog.open(EditPermissionsComponent, dialogConfig);
+    dialogConfig.position = {
+      top: '0',
+      left: '0'
+    };
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+
+    dialogRef.componentInstance.onUpdatePermission.subscribe(permissionName => {
+      this.showNotification('top', 'right', "Permission: ", permissionName, " was updated");
     });
 
     dialogRef.backdropClick().subscribe(_ => {

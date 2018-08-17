@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>{{modalTitle}}</h2>
+<span class="userNameSpan">{{ user.username }}</span>
+
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+      
+        <!-- Grant Column -->
+        <ng-container matColumnDef="grant">
+          <th mat-header-cell *matHeaderCellDef> Grant </th>
+          <td mat-cell *matCellDef="let element"> 
+              <mat-checkbox [disabled]="element.deny" id={{element.name}}_grant_checkbox checked=element.grant (change)="checkboxEvent('grantEvent', $event)" [(ngModel)]="element.grant"></mat-checkbox>
+          </td>
+        </ng-container>
+      
+        <!-- Deny Column -->
+        <ng-container matColumnDef="deny">
+          <th mat-header-cell *matHeaderCellDef> Deny </th>
+          <td mat-cell *matCellDef="let element">
+              <mat-checkbox [disabled]="element.grant" id={{element.name}}_deny_checkbox checked=element.deny (change)="checkboxEvent('denyEvent', $event)" [(ngModel)]="element.deny"></mat-checkbox>
+          </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="setClickedPermission(row)"></tr>
+
+</table>
+      
+      
