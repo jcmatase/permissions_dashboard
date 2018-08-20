@@ -23,7 +23,7 @@ export class EditRolesComponent {
   }
 
   ngOnInit() {
-    this.displayedColumns = ['id', 'name', 'status'];
+    this.displayedColumns = ['name', 'status'];
     this.setRolesInfo();
     this.dataSource = new MatTableDataSource(this.roles);
   }

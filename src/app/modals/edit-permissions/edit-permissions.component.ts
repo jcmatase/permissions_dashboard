@@ -15,6 +15,9 @@ export class EditPermissionsComponent {
   modalTitle: string;
   user: any;
   onUpdatePermission: any;
+  grantCheckbox: boolean;
+  denyCheckbox: boolean;
+  permissioncCategoryMap: Map<number, string>;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data:any) { 
     this.modalTitle = data.title;
@@ -23,8 +26,9 @@ export class EditPermissionsComponent {
   }
 
   ngOnInit() {
-    this.displayedColumns = ['id', 'name', 'grant', 'deny'];
+    this.displayedColumns = ['name', 'grant', 'deny'];
     this.setPermissionsInfo();
+    // populate permissions map
     this.dataSource = new MatTableDataSource(this.permissions);
   }
 
@@ -34,17 +38,28 @@ export class EditPermissionsComponent {
 
   private setPermissionsInfo() {
     this.permissions = [
-        {id: 1, name: 'view_gateway', grant: true, deny: false},
-        {id: 2, name: 'edit_gateway', grant: false, deny: true},
-        {id: 3, name: 'view_permissions', grant: true, deny: false},
-        {id: 4, name: 'edit_permissions', grant: false, deny: false},
-        {id: 5, name: 'view_iso', grant: true, deny: false},
-        {id: 6, name: 'edit_iso', grant: false, deny: false}
+        {id: 1, name: 'view_gateway', category_id: 1, grant: true, deny: false},
+        {id: 2, name: 'edit_gateway', category_id: 1, grant: false, deny: true},
+        {id: 3, name: 'view_finance', category_id: 2, grant: true, deny: false},
+        {id: 4, name: 'edit_finance', category_id: 2, grant: false, deny: false},
+        {id: 5, name: 'view_iso', category_id: 3, grant: true, deny: false},
+        {id: 6, name: 'edit_iso', category_id: 3, grant: false, deny: false},
+        {id: 6, name: 'view_permissions', category_id: 4, grant: false, deny: false}
       ];
+  }
+
+  handleCheckUncheck(permission, checkbox, event){
+    if(event && checkbox === "grantEvent"){
+      permission["deny"] = false;
+    }
+    if(event && checkbox === "denyEvent"){
+      permission["grant"] = false;
+    }
   }
 
   checkboxEvent (checkboxType, event) {
       console.log("checkboxType: " + checkboxType + " | " + "checked: " + event.checked);
+      this.handleCheckUncheck(this.clickedPermission, checkboxType, event.checked);
       console.dir(this.clickedPermission);
       // Query db to update permission.
       // Show success or fail notificaction
