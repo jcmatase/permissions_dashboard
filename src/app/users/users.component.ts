@@ -176,8 +176,8 @@ export class UsersComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "600px";
-    dialogConfig.height = "400px";
+    dialogConfig.width = "800px";
+    dialogConfig.height = "600px";
     dialogConfig.data = {
       id: 3,
       title: "User Permissions for: ",
@@ -215,8 +215,8 @@ export class UsersComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "600px";
-    dialogConfig.height = "400px";
+    dialogConfig.width = "700px";
+    dialogConfig.height = "600px";
     dialogConfig.data = {
       id: 3,
       title: "User Roles for: ",
