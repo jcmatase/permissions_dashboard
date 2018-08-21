@@ -18,6 +18,7 @@
             <table class="table">
               <thead class=" text-primary">
                 <th>username</th>
+                <th>email</th>
                 <th>name</th>
                 <th>edit</th>
                 <th>roles</th>
@@ -27,6 +28,7 @@
               <tbody *ngFor="let user of users">
                 <tr>
                   <td>{{ user.username }}</td>
+                  <td>{{ user.email }}</td>
                   <td>{{ user.name }}</td>
                   <td>
                     <button class="btn clean-button now-ui-icons ui-1_settings-gear-63" (click)="openEditUserModal(user)"></button>

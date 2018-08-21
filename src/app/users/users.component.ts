@@ -28,32 +28,32 @@ export class UsersComponent implements OnInit {
     this.users = [
       {
           "id" : 1,
-          "username" : "jean.mata@bvmedia.cr",
-          "password" : "ojaisbt67tr751397Jgs74rhBf",
+          "username" : "jcmatase",
+          "email" : "jean.mata@bvmedia.cr",
           "name" : "Jean Carlo Mata"
       },
       {
           "id" : 2,
-          "username" : "ariel@onpoint.com",
-          "password" : "jajsJHVhvjhgsvjJSCJhv871872613b",
+          "username" : "ariel",
+          "email" : "ariel@onpoint.com",
           "name" : "Ariel Dayan"
       },
       {
           "id" : 3,
-          "username" : "chucky@onpoint.com",
-          "password" : "ojaisbt67tr751397Jgs74rhBf",
+          "username" : "chucky",
+          "email" : "chucky@onpoint.com",
           "name" : "Charles Ohana"
       },
       {
           "id" : 4,
-          "username" : "mainor.miranda@bvmedia.cr",
-          "password" : "ojaisbt67tr751397Jgs74rhBf",
+          "username" : "mainor",
+          "email" : "mainor.miranda@bvmedia.cr",
           "name" : "Mainor Miranda"
       },
       {
           "id" : 5,
-          "username" : "charlie@onpoint.com",
-          "password" : "ojaisbt67tr751397Jgs74rhBf",
+          "username" : "charlie",
+          "email" : "charlie@onpoint.com",
           "name" : "Charlie Brown"
       }
     ];
