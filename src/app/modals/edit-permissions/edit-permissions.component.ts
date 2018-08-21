@@ -1,5 +1,11 @@
 import {Component, Inject, EventEmitter} from '@angular/core';
 import {MatTableDataSource, MAT_DIALOG_DATA} from '@angular/material';
+import { filter } from 'rxjs-compat/operator/filter';
+
+export interface Category {
+  id: number;
+  name: string;
+}
 
 @Component({
   selector: 'table-filtering-example',
@@ -17,7 +23,9 @@ export class EditPermissionsComponent {
   onUpdatePermission: any;
   grantCheckbox: boolean;
   denyCheckbox: boolean;
-  permissioncCategoryMap: Map<number, string>;
+  permissionsMap: any;
+  permissionCategories: any[] = [];
+  permissionIds: number[] = [];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data:any) { 
     this.modalTitle = data.title;
@@ -26,10 +34,33 @@ export class EditPermissionsComponent {
   }
 
   ngOnInit() {
-    this.displayedColumns = ['name', 'grant', 'deny'];
+    this.displayedColumns = ['name', 'category_name', 'grant', 'deny'];
     this.setPermissionsInfo();
-    // populate permissions map
+    this.populatePermissionsMap();
     this.dataSource = new MatTableDataSource(this.permissions);
+  }
+
+  populatePermissionsMap() {
+    for(var permissionCounter = 0; permissionCounter < this.permissions.length; permissionCounter++){
+      let currentCategoryID = this.permissions[permissionCounter]['category_id'];
+      let addElement = this.existCategoryLocally(currentCategoryID);
+      if(addElement === -1) {
+        let currentCategoryName = this.permissions[permissionCounter]['category_name'];
+        this.permissionCategories.push({
+          id: currentCategoryID,
+          name: currentCategoryName
+        });
+        this.permissionIds.push(currentCategoryID);
+      }
+    }
+  }
+
+  existCategoryLocally(pCategoryID) {
+    return this.permissionIds.indexOf(pCategoryID);
+  }
+
+  applyCategoryFilter(filterValue) {
+    this.dataSource.filter = filterValue;
   }
 
   applyFilter(filterValue: string) {
@@ -38,13 +69,13 @@ export class EditPermissionsComponent {
 
   private setPermissionsInfo() {
     this.permissions = [
-        {id: 1, name: 'view_gateway', category_id: 1, grant: true, deny: false},
-        {id: 2, name: 'edit_gateway', category_id: 1, grant: false, deny: true},
-        {id: 3, name: 'view_finance', category_id: 2, grant: true, deny: false},
-        {id: 4, name: 'edit_finance', category_id: 2, grant: false, deny: false},
-        {id: 5, name: 'view_iso', category_id: 3, grant: true, deny: false},
-        {id: 6, name: 'edit_iso', category_id: 3, grant: false, deny: false},
-        {id: 6, name: 'view_permissions', category_id: 4, grant: false, deny: false}
+        {id: 1, name: 'view_gateway', category_id: 1, category_name: "Krobots", grant: true, deny: false},
+        {id: 2, name: 'edit_gateway', category_id: 1, category_name: "Krobots", grant: false, deny: true},
+        {id: 3, name: 'view_finance', category_id: 2, category_name: "Finance", grant: true, deny: false},
+        {id: 4, name: 'edit_finance', category_id: 2, category_name: "Finance", grant: false, deny: false},
+        {id: 5, name: 'view_iso', category_id: 3, category_name: "ISO", grant: true, deny: false},
+        {id: 6, name: 'edit_iso', category_id: 3, category_name: "ISO", grant: false, deny: false},
+        {id: 7, name: 'view_permissions', category_id: 4, category_name: "Permissions", grant: false, deny: false}
       ];
   }
 

@@ -6,12 +6,26 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 </mat-form-field>
 
+<mat-form-field>
+  <mat-select (selectionChange)="applyCategoryFilter($event.value)" placeholder="Permission Category">
+    <mat-option *ngFor="let permission of permissionCategories" [value]="permission.name">
+      {{permission.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       
         <!-- Name Column -->
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef> Name </th>
           <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- Category Column -->
+        <ng-container matColumnDef="category_name">
+          <th mat-header-cell *matHeaderCellDef> Category </th>
+          <td mat-cell *matCellDef="let element"> {{element.category_name}} </td>
         </ng-container>
       
         <!-- Grant Column -->
