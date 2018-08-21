@@ -1,5 +1,6 @@
 <h2 mat-dialog-title>{{modalTitle}}</h2>
 <span class="userNameSpan">{{ user.username }}</span>
+<button class="closeBtn" mat-button mat-dialog-close mat-mini-fab color="warn">X</button>
 
 <mat-form-field>
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">

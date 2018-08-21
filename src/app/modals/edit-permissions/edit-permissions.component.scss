@@ -14,7 +14,14 @@ table {
 .userNameSpan {
   font-weight: bold;
   margin-left: 40px;
+  margin-right: 80px;
   color: red;
+  display: inline-block;
+}
+
+.closeBtn {
+  float: right;
+  outline: none;
 }
 
 .mat-checkbox {

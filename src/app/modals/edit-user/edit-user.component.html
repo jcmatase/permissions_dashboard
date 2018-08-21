@@ -1,5 +1,6 @@
 <h2 mat-dialog-title>{{modalTitle}}</h2>
 <span class="userNameSpan">{{ currentUser.username }}</span>
+<button class="closeBtn" mat-button mat-dialog-close mat-mini-fab color="warn">X</button>
 
 <form class="edit-user-form">
     <table class="example-full-width" cellspacing="0">
@@ -28,6 +29,5 @@
 </form>
 
 <mat-dialog-actions>
-    <button mat-button mat-dialog-close>Close</button>
     <button mat-button mat-raised-button color="primary" (click)="startEditingUser(usernameInput, passwordInput, nameInput)">Edit</button>
 </mat-dialog-actions>
