@@ -1,34 +1,63 @@
 <h2 class="matTitle" mat-dialog-title>{{modalTitle}}</h2>
 <button class="closeBtn" mat-button mat-dialog-close mat-mini-fab color="warn">X</button>
-<mat-dialog-content>
 
-<form class="add-user-form">
-  <table class="example-full-width" cellspacing="0">
-    <tr>
-      <td>
-        <mat-form-field class="example-full-width">
-          <input #usernameInput matInput placeholder="username">
-        </mat-form-field>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <mat-form-field class="example-full-width">
-          <input #passwordInput matInput placeholder="password" type="password">
-        </mat-form-field>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <mat-form-field class="example-full-width">
-          <input #nameInput matInput placeholder="name">
-        </mat-form-field>
-      </td>
-    </tr>
-  </table>
-  
-  </form>
-</mat-dialog-content>
-<mat-dialog-actions>
- <button mat-button mat-raised-button color="primary" (click)="startSavingUser(usernameInput, passwordInput, nameInput)">Add</button>
-</mat-dialog-actions>
+<form [formGroup]="userFormGroup" (ngSubmit)="handleSubmit()">
+
+  <div class="form-group">
+    <label for="firstname" class="label-control">User Name:</label>
+    <input type="text" formControlName="username" class="form-control" required>
+    <div *ngIf="username.invalid && username.touched">
+      <div *ngIf="username.errors.required">
+        <span style="color:red" ng-show="myForm.pin.$error.pattern">User Name is required</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+      <label for="email" class="label-control">Email:</label>
+      <input formControlName="email" class="form-control" required>
+      <div *ngIf="email.invalid && email.touched">
+        <div *ngIf="email.errors.required">
+          <span style="color:red" ng-show="myForm.pin.$error.pattern">Email is required</span>
+        </div>
+        <div *ngIf="email.errors.email">
+            <span style="color:red" ng-show="myForm.pin.$error.pattern">Email is not valid</span>
+          </div>
+      </div>
+    </div>
+
+  <div class="form-group">
+    <label for="password" class="label-control">Password:</label>
+    <input type="password" formControlName="password" class="form-control" required>
+    <div *ngIf="password.invalid && password.touched">
+      <div *ngIf="password.errors.required">
+        <span style="color:red" ng-show="myForm.pin.$error.pattern">Password is required</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="confirmPassword" class="label-control">Confirm Password:</label>
+    <input type="password" formControlName="confirmPassword" class="form-control" required>
+    <div *ngIf="confirmPassword.invalid && confirmPassword.touched">
+      <div *ngIf="confirmPassword.errors.required">
+        <span style="color:red" ng-show="myForm.pin.$error.pattern">Confirm Password is required</span>
+      </div>
+      <div *ngIf="confirmPassword.errors.MatchPassword">
+        <span style="color:red" ng-show="myForm.pin.$error.pattern">Please make sure your passwords match</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="name" class="label-control">Name:</label>
+    <input formControlName="name" class="form-control" required>
+    <div *ngIf="name.invalid && name.touched">
+      <div *ngIf="name.errors.required">
+        <span style="color:red" ng-show="myForm.pin.$error.pattern">Name is required</span>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" [disabled]="! userFormGroup.valid"> submit</button>
+</form>

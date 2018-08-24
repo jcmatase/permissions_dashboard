@@ -1,5 +1,7 @@
 import { Component, OnInit, Inject, EventEmitter } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
+import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
+import { CustomValidators } from "../../helpers/custom-validators";
 
 @Component({
   selector: 'add-user-modal',
@@ -11,36 +13,68 @@ export class AddUserComponent implements OnInit {
   modalTitle: string;
   newUser: any;
   onAddEvn: any;
+  userFormGroup: FormGroup;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data:any) { 
+  constructor(@Inject(MAT_DIALOG_DATA) public data:any, private formBuilder: FormBuilder) { 
     this.modalTitle = data.title;
     this.onAddEvn = new EventEmitter();
   }
 
   ngOnInit() {
+    this.initFormGroup();
   }
 
-  startSavingUser(pUserNameInput, pPasswordInput, pNameInput) {
+  initFormGroup() {
+    this.userFormGroup = this.formBuilder.group({
+      'username': this.formBuilder.control('',Validators.required),
+      'password': this.formBuilder.control('', Validators.required),
+      'confirmPassword': this.formBuilder.control('', Validators.required),
+      'email': this.formBuilder.control('', Validators.email),
+      'name': this.formBuilder.control('', Validators.required)
+    }, {
+      validator: CustomValidators.MatchPassword
+    });
+  }
+
+  get username() {
+    return this.userFormGroup.get('username');
+  }
+
+  get password() {
+    return this.userFormGroup.get('password');
+  }
+
+  get confirmPassword() {
+    return this.userFormGroup.get('confirmPassword');
+  }
+
+  get email() {
+    return this.userFormGroup.get('email');
+  }
+
+  get name() {
+    return this.userFormGroup.get('name');
+  }
+
+  handleSubmit() {
+    alert("Values are correct. Let's validate them");
     this.newUser = {
-        "id" : 100,
-        "username" : pUserNameInput.value,
-        "password" : pPasswordInput.value,
-        "name" : pNameInput.value
+      "id" : 100,
+      "username" : this.userFormGroup.value.username,
+      "email" : this.userFormGroup.value.email,
+      "password" : this.userFormGroup.value.password,
+      "name" : this.userFormGroup.value.name
     };
-    // Query db to add user
-    // Query db needs to return success if user dosn't exist and connection was succesful. I will return the new user data from db
-    // If success add user to users table and show notification
+    console.dir(this.newUser);
+    var httpResultStatus = 1;
     var httpResultMsg = " was added.";
     var notificationObj = {
-        "user" : this.newUser,
-        "msgStatus" : httpResultMsg,
-        "classType" : "alert alert-success alert-with-icon"
+      "user" : this.newUser,
+      "status" : httpResultStatus,
+      "msgStatus" : httpResultMsg,
+      "classType" : "alert alert-success alert-with-icon"
     };
     this.onAddEvn.emit(notificationObj);
-  }
-
-  printUserInfo() {
-    console.log(this.newUser);
   }
 
 

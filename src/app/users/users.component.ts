@@ -97,8 +97,8 @@ export class UsersComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "350px";
-    dialogConfig.height = "315px";
+    dialogConfig.width = "415px";
+    dialogConfig.height = "615px";
     dialogConfig.data = {
       id: 1,
       title: "Add User"
@@ -117,9 +117,14 @@ export class UsersComponent implements OnInit {
     });
 
     dialogRef.componentInstance.onAddEvn.subscribe(notificationObj => {
-      this.addUserToArray(notificationObj["user"]);
-      this.showNotification('top', 'right', "User: ", notificationObj["user"]["name"], notificationObj["msgStatus"], notificationObj["classType"]);
-      dialogRef.close();
+      if(notificationObj["status"]) {
+        this.addUserToArray(notificationObj["user"]);
+        this.showNotification('top', 'right', "User: ", notificationObj["user"]["name"], notificationObj["msgStatus"], notificationObj["classType"]);
+        dialogRef.close();
+      }
+      else{
+        
+      }
     });
   }
 
