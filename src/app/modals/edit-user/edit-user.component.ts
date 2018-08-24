@@ -39,45 +39,67 @@ export class EditUserComponent {
       }
   }
 
-  startEditingUser(usernameInput, passwordInput, nameInput) {
-      var httpResultMsg, notificationObj;
+  startEditingUser(usernameInput, emailInput, passwordInput, confirmPasswordInput, nameInput, notificationObj){
+    this.username = usernameInput.value;
+    this.email = emailInput.value;
+    this.password = passwordInput.value;
+    this.name = nameInput.value;                            
+    // Query db to update user.
+    // Show success or fail notificaction (1, 0)
+    this.updatedUser = {
+        "id" : this.currentUser["id"],
+        "username" : this.username,
+        "email" : this.email,
+        "password" : this.password,
+        "name" : this.name
+    };
+    notificationObj = this.setNotificationObj(1, " was updated.", "alert alert-success alert-with-icon");
+    this.onUpdateUser.emit(notificationObj)
+    console.log("update user: ");
+    console.dir(this.updatedUser);
+  }
+
+  validateUserInputs(usernameInput, emailInput, passwordInput, confirmPasswordInput, nameInput) {
+      var notificationObj;
       if(!this.formErrors){
-          if(this.anyFieldToUpdate(usernameInput.value, passwordInput.value, nameInput.value)){
-              usernameInput.value !== '' ? this.username = usernameInput.value : this.username = this.currentUser.username;
-              passwordInput.value !== '' ? this.password = passwordInput.value : this.password = this.currentUser.username;
-              nameInput.value !== '' ? this.name = nameInput.value : this.name = this.currentUser.name;
-              // Query db to update user.
-              // Show success or fail notificaction
-              httpResultMsg = " was updated.";
-              notificationObj = {
-                  "username" : this.currentUser["username"],
-                  "msgStatus" : httpResultMsg,
-                  "classType" : "alert alert-success alert-with-icon"
-              };
-              this.updatedUser = {
-                  "id" : this.currentUser["id"],
-                  "username" : this.username,
-                  "password" : this.password,
-                  "name" : this.name
-              };
-              this.onUpdateUser.emit(notificationObj)
-              console.log("update user: ");
-              console.dir(this.updatedUser);
+          if(this.anyFieldToUpdate(usernameInput.value, emailInput.value, passwordInput.value, confirmPasswordInput.value, nameInput.value)){
+              if(this.passwordsMatching(passwordInput, confirmPasswordInput)){
+                this.startEditingUser(usernameInput, emailInput, passwordInput, confirmPasswordInput, nameInput, notificationObj);
+              }else{
+                  // 100 to now show user
+                  notificationObj = this.setNotificationObj(100, "Please make sure your passwords match.", "alert alert-danger alert-with-icon");
+                  this.onUpdateUser.emit(notificationObj);
+              }
             }
             else{
-                httpResultMsg = " nothing to update ";
-                notificationObj = {
-                    "username" : this.currentUser["username"],
-                    "msgStatus" : httpResultMsg,
-                    "classType" : "alert alert-warning alert-with-icon"
-                };
-                this.onUpdateUser.emit(notificationObj)
+                notificationObj = this.setNotificationObj(100, "Nothing to update", "alert alert-warning alert-with-icon");
+                this.onUpdateUser.emit(notificationObj);
             }
       }
   }
 
-  anyFieldToUpdate(usernameInput, passwordInput, nameInput) {
-      if(usernameInput !== '' || passwordInput !== '' || nameInput !== ''){
+  setNotificationObj(httpResultStatus, httpResultMsg, classType){
+      var notificationObj = {};
+      notificationObj = {
+        "status" : httpResultStatus,
+        "msgStatus" : httpResultMsg,
+        "username" : this.currentUser["username"],
+        "classType" : classType
+      };
+      return notificationObj;
+  }
+
+  anyFieldToUpdate(usernameInput, emailInput, passwordInput, confirmPasswordInput, nameInput) {
+      if(usernameInput !== '' || emailInput !== '' || passwordInput !== '' || nameInput !== '' || confirmPasswordInput !== ''){
+          return true;
+      }
+      else{
+          return false;
+      }
+  }
+
+  passwordsMatching(passwordInput, confirmPasswordInput){
+      if(passwordInput.value === confirmPasswordInput.value) {
           return true;
       }
       else{

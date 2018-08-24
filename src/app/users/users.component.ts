@@ -123,7 +123,7 @@ export class UsersComponent implements OnInit {
         dialogRef.close();
       }
       else{
-        
+
       }
     });
   }
@@ -259,7 +259,7 @@ export class UsersComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "395px";
-    dialogConfig.height = "315px";
+    dialogConfig.height = "425px";
     dialogConfig.data = {
       id: 3,
       title: "Edit User: ",
@@ -275,8 +275,13 @@ export class UsersComponent implements OnInit {
     });
 
     dialogRef.componentInstance.onUpdateUser.subscribe(notificationValue => {
-      this.showNotification('top', 'right', "User: ", notificationValue["username"], notificationValue["msgStatus"], notificationValue["classType"]);
-      dialogRef.close();
+      if(notificationValue["status"] === 100){
+        this.showNotification('top', 'center', "", "", notificationValue["msgStatus"], notificationValue["classType"]);
+      }
+      else{
+        this.showNotification('top', 'right', "User: ", notificationValue["username"], notificationValue["msgStatus"], notificationValue["classType"]);
+        dialogRef.close();
+      }
     });
 
     dialogRef.backdropClick().subscribe(_ => {
