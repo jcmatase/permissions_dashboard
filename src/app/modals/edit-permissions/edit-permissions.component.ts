@@ -35,28 +35,20 @@ export class EditPermissionsComponent {
 
   ngOnInit() {
     this.displayedColumns = ['name', 'category_name', 'grant', 'deny'];
+    // Load only permissions configured for this user
     this.setPermissionsInfo();
+    // Query db and retrieve all values in Permission_Category
     this.populatePermissionsMap();
     this.dataSource = new MatTableDataSource(this.permissions);
   }
 
   populatePermissionsMap() {
-    for(var permissionCounter = 0; permissionCounter < this.permissions.length; permissionCounter++){
-      let currentCategoryID = this.permissions[permissionCounter]['category_id'];
-      let addElement = this.existCategoryLocally(currentCategoryID);
-      if(addElement === -1) {
-        let currentCategoryName = this.permissions[permissionCounter]['category_name'];
-        this.permissionCategories.push({
-          id: currentCategoryID,
-          name: currentCategoryName
-        });
-        this.permissionIds.push(currentCategoryID);
-      }
-    }
-  }
-
-  existCategoryLocally(pCategoryID) {
-    return this.permissionIds.indexOf(pCategoryID);
+    this.permissionCategories = [
+      {id: 1, name: "Krobots"},
+      {id: 2, name: "Finance"},
+      {id: 3, name: "Permissions"},
+      {id: 4, name: "Websites"}
+    ];
   }
 
   applyCategoryFilter(filterValue) {
