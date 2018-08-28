@@ -39,7 +39,7 @@ export class EditCategoryComponent implements OnInit {
   handleSubmit() {
     alert("Values are correct. Let's validate them");
     this.newCategory = {
-      "id" : 100,
+      "id" : this.currentCategory["id"],
       "name" : this.editCategoryFormGroup.value.name
     };
     var httpResultStatus = 1;

@@ -48,13 +48,6 @@ export class PermissionCategoryComponent implements OnInit {
             //toastClass: "alert alert-success alert-with-icon",
         });
     }
-    
-    private addCategoryToArray(newCategory) {
-        console.dir(newCategory);
-        this.permissionCategories.push(newCategory);
-        this.setTableDataSource();
-    }
-
   
     //                _     _    _____      _                                _____  _       _             
     //       /\      | |   | |  / ____|    | |                              |  __ \(_)     | |            
@@ -65,6 +58,14 @@ export class PermissionCategoryComponent implements OnInit {
     //                                               __/ |            __/ |                          __/ |
     //                                              |___/            |___/                          |___/ 
 
+    
+    
+    private addCategoryToArray(newCategory) {
+        console.dir(newCategory);
+        this.permissionCategories.push(newCategory);
+        this.setTableDataSource();
+    }
+    
     openAddCategory() {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
@@ -110,6 +111,17 @@ export class PermissionCategoryComponent implements OnInit {
     //                                             __/ |            __/ |                          __/ |
     //                                            |___/            |___/                          |___/ 
 
+    
+    private editCategory(categoryUpdated) {
+        for(var categoryCounter = 0; categoryCounter < this.permissionCategories.length; categoryCounter++){
+            var currentCategory = this.permissionCategories[categoryCounter];
+            if(currentCategory["id"] === categoryUpdated["id"]){
+                currentCategory["name"] = categoryUpdated["name"];
+                return;
+            }
+        }
+    }
+    
     openEditCategoryModal(category) {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
@@ -136,7 +148,7 @@ export class PermissionCategoryComponent implements OnInit {
 
         dialogRef.componentInstance.onEditCategoryEvn.subscribe(notificationObj => {
             if(notificationObj["status"]) {
-                this.addCategoryToArray(notificationObj["category"]);
+                this.editCategory(notificationObj["category"]);
                 this.showNotification('top', 'right', "Category: ", notificationObj["category"]["name"], notificationObj["msgStatus"], notificationObj["classType"]);
                 dialogRef.close();
             }
