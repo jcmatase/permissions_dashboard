@@ -19,6 +19,7 @@ import { EditRolesComponent } from '../app/modals/edit-roles/edit-roles.componen
 import { EditUserComponent } from '../app/modals/edit-user/edit-user.component';
 import { AddCategoryComponent } from '../app/modals/add-category/add-category.component';
 import { EditCategoryComponent } from '../app/modals/edit-category/edit-category.component';
+import { RemoveCategoryComponent } from '../app/modals/remove-category/remove-category.component';
 
 @NgModule({
   imports: [
@@ -38,14 +39,14 @@ import { EditCategoryComponent } from '../app/modals/edit-category/edit-category
     AppComponent,
     AdminLayoutComponent,
     AddUserComponent, RemoveUserComponent, EditPermissionsComponent, EditRolesComponent, EditUserComponent,
-    AddCategoryComponent, EditCategoryComponent
+    AddCategoryComponent, EditCategoryComponent, RemoveCategoryComponent
   ],
   providers: [
   ],
   bootstrap: [AppComponent],
   entryComponents: [
     AddUserComponent, RemoveUserComponent, EditPermissionsComponent, EditRolesComponent, EditUserComponent,
-    AddCategoryComponent, EditCategoryComponent
+    AddCategoryComponent, EditCategoryComponent, RemoveCategoryComponent
   ]
 })
 export class AppModule { }
