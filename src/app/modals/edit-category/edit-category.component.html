@@ -1,11 +1,11 @@
 <h2 class="matTitle" mat-dialog-title>{{modalTitle}}</h2>
 <button class="closeBtn" mat-button mat-dialog-close mat-mini-fab color="warn">X</button>
 
-<form [formGroup]="userFormGroup" (ngSubmit)="handleSubmit()">
+<form [formGroup]="editCategoryFormGroup" (ngSubmit)="handleSubmit()">
 
   <div class="form-group">
     <label for="name" class="label-control">Name:</label>
-    <input formControlName="name" class="form-control" required>
+    <input formControlName="name" placeholder={{currentCategory.name}} class="form-control" required>
     <div *ngIf="name.invalid && name.touched">
       <div *ngIf="name.errors.required">
         <span style="color:red" ng-show="myForm.pin.$error.pattern">Category Name is required</span>
@@ -13,5 +13,5 @@
     </div>
   </div>
 
-  <button class="btn btn-primary" [disabled]="! userFormGroup.valid"> Add </button>
+  <button class="btn btn-primary" [disabled]="! editCategoryFormGroup.valid"> Edit </button>
 </form>

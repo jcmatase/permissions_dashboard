@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig, MatTableDataSource, MAT_DIALOG_DATA } from 
 
 import { ToastrService } from 'ngx-toastr';
 import { AddCategoryComponent } from '../modals/add-category/add-category.component';
+import { EditCategoryComponent } from '../modals/edit-category/edit-category.component';
 
 @Component({
     selector: 'users-list',
@@ -59,39 +60,85 @@ export class PermissionCategoryComponent implements OnInit {
     //                                               __/ |            __/ |                          __/ |
     //                                              |___/            |___/                          |___/ 
 
-  openAddCategory() {
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.disableClose = true;
-      dialogConfig.autoFocus = true;
-      dialogConfig.width = "415px";
-      dialogConfig.height = "280px";
-      dialogConfig.data = {
-      id: 1,
-      title: "Add Category"
-    };
-    const dialogRef = this.addCategoryDialog.open(AddCategoryComponent, dialogConfig);
-    dialogConfig.position = {
-        top: '0',
-        left: '0'
-    };
+    openAddCategory() {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = "415px";
+        dialogConfig.height = "280px";
+        dialogConfig.data = {
+            id: 1,
+            title: "Add Category"
+        };
+        const dialogRef = this.addCategoryDialog.open(AddCategoryComponent, dialogConfig);
+        dialogConfig.position = {
+            top: '0',
+            left: '0'
+        };
 
-    dialogRef.afterClosed().subscribe(result => {
-    });
+        dialogRef.afterClosed().subscribe(result => {
+        });
 
-    dialogRef.backdropClick().subscribe(_ => {
-        dialogRef.close();
-    });
-
-    dialogRef.componentInstance.onAddCategoryEvn.subscribe(notificationObj => {
-        if(notificationObj["status"]) {
-            this.addCategoryToArray(notificationObj["category"]);
-            this.showNotification('top', 'right', "Category: ", notificationObj["category"]["name"], notificationObj["msgStatus"], notificationObj["classType"]);
+        dialogRef.backdropClick().subscribe(_ => {
             dialogRef.close();
-        }
-        else{
+        });
 
-        }
-    });
-}
+        dialogRef.componentInstance.onAddCategoryEvn.subscribe(notificationObj => {
+            if(notificationObj["status"]) {
+                this.addCategoryToArray(notificationObj["category"]);
+                this.showNotification('top', 'right', "Category: ", notificationObj["category"]["name"], notificationObj["msgStatus"], notificationObj["classType"]);
+                dialogRef.close();
+            }
+            else{
+
+            }
+        });
+    }
+
+
+    //    ______    _ _ _      _____      _                                _____  _       _             
+    //   |  ____|  | (_) |    / ____|    | |                              |  __ \(_)     | |            
+    //   | |__   __| |_| |_  | |     __ _| |_ ___  __ _  ___  _ __ _   _  | |  | |_  __ _| | ___   __ _ 
+    //   |  __| / _` | | __| | |    / _` | __/ _ \/ _` |/ _ \| '__| | | | | |  | | |/ _` | |/ _ \ / _` |
+    //   | |___| (_| | | |_  | |___| (_| | ||  __/ (_| | (_) | |  | |_| | | |__| | | (_| | | (_) | (_| |
+    //   |______\__,_|_|\__|  \_____\__,_|\__\___|\__, |\___/|_|   \__, | |_____/|_|\__,_|_|\___/ \__, |
+    //                                             __/ |            __/ |                          __/ |
+    //                                            |___/            |___/                          |___/ 
+
+    openEditCategoryModal(category) {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = "415px";
+        dialogConfig.height = "280px";
+        dialogConfig.data = {
+            id: 2,
+            title: "Edit Category",
+            category: category
+        };
+        const dialogRef = this.editCategoryDialog.open(EditCategoryComponent, dialogConfig);
+        dialogConfig.position = {
+            top: '0',
+            left: '0'
+        };
+
+        dialogRef.afterClosed().subscribe(result => {
+        });
+
+        dialogRef.backdropClick().subscribe(_ => {
+            dialogRef.close();
+        });
+
+        dialogRef.componentInstance.onEditCategoryEvn.subscribe(notificationObj => {
+            if(notificationObj["status"]) {
+                this.addCategoryToArray(notificationObj["category"]);
+                this.showNotification('top', 'right', "Category: ", notificationObj["category"]["name"], notificationObj["msgStatus"], notificationObj["classType"]);
+                dialogRef.close();
+            }
+            else{
+
+            }
+        });
+    }
 
 }
