@@ -6,3 +6,9 @@ table {
 .add-category-btn {
     margin-left: 15px;
 }
+
+.centerThValues {
+    text-align:center;
+    font-weight: bold;
+    font-size: medium;
+}
