@@ -7,6 +7,12 @@ table {
     margin-left: 15px;
 }
 
+.clean-button {
+    background-color: transparent;
+    color: black;
+    outline: none;
+}
+
 .centerThValues {
     text-align:center;
     font-weight: bold;
