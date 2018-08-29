@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UsersComponent } from '../../users/users.component';
+import { PermissionsComponent } from '../../permissions/permissions.component';
 import { PermissionCategoryComponent } from '../../permission_category/permission_category.component';
 import { IconsComponent } from '../../icons/icons.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
@@ -27,6 +28,7 @@ import { ToastrModule } from 'ngx-toastr';
   ],
   declarations: [
     UsersComponent,
+    PermissionsComponent,
     PermissionCategoryComponent,
     DashboardComponent,
     IconsComponent,
