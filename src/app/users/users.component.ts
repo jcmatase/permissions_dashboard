@@ -5,7 +5,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddUserComponent } from '../modals/add-user/add-user.component';
 import { RemoveUserComponent } from '../modals/remove-user/remove-user.component';
 import { EditUserPermissionsComponent } from '../modals/edit-user-permissions/dashboard';
-import { EditRolesComponent } from '../modals/edit-roles/edit-roles.component';
+import { EditUserRolesComponent } from '../modals/edit-user-roles/edit-roles.component';
 import { EditUserComponent } from '../modals/edit-user/edit-user.component';
 
 @Component({
@@ -227,7 +227,7 @@ export class UsersComponent implements OnInit {
       title: "User Roles for: ",
       user: pUser
     };
-    const dialogRef = this.removeUserDialog.open(EditRolesComponent, dialogConfig);
+    const dialogRef = this.removeUserDialog.open(EditUserRolesComponent, dialogConfig);
     dialogConfig.position = {
       top: '0',
       left: '0'

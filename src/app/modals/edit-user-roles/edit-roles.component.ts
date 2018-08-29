@@ -6,7 +6,7 @@ import {MatTableDataSource, MAT_DIALOG_DATA} from '@angular/material';
   styleUrls: ['./edit-roles.component.scss'],
   templateUrl: './edit-roles.component.html',
 })
-export class EditRolesComponent {
+export class EditUserRolesComponent {
 
   displayedColumns: string[];
   dataSource: any;

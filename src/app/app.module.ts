@@ -15,7 +15,7 @@ import { MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule, M
 import { AddUserComponent } from '../app/modals/add-user/add-user.component';
 import { RemoveUserComponent } from '../app/modals/remove-user/remove-user.component';
 import { EditUserPermissionsComponent } from '../app/modals/edit-user-permissions/dashboard';
-import { EditRolesComponent } from '../app/modals/edit-roles/edit-roles.component';
+import { EditUserRolesComponent } from '../app/modals/edit-user-roles/edit-roles.component';
 import { EditUserComponent } from '../app/modals/edit-user/edit-user.component';
 import { AddCategoryComponent } from '../app/modals/add-category/add-category.component';
 import { EditCategoryComponent } from '../app/modals/edit-category/edit-category.component';
@@ -38,14 +38,14 @@ import { RemoveCategoryComponent } from '../app/modals/remove-category/remove-ca
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AddUserComponent, RemoveUserComponent, EditUserPermissionsComponent, EditRolesComponent, EditUserComponent,
+    AddUserComponent, RemoveUserComponent, EditUserPermissionsComponent, EditUserRolesComponent, EditUserComponent,
     AddCategoryComponent, EditCategoryComponent, RemoveCategoryComponent
   ],
   providers: [
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    AddUserComponent, RemoveUserComponent, EditUserPermissionsComponent, EditRolesComponent, EditUserComponent,
+    AddUserComponent, RemoveUserComponent, EditUserPermissionsComponent, EditUserRolesComponent, EditUserComponent,
     AddCategoryComponent, EditCategoryComponent, RemoveCategoryComponent
   ]
 })
