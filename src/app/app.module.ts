@@ -14,7 +14,7 @@ import { MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule, M
 // Modals
 import { AddUserComponent } from '../app/modals/add-user/add-user.component';
 import { RemoveUserComponent } from '../app/modals/remove-user/remove-user.component';
-import { EditPermissionsComponent } from '../app/modals/edit-permissions/edit-permissions.component';
+import { EditUserPermissionsComponent } from '../app/modals/edit-user-permissions/dashboard';
 import { EditRolesComponent } from '../app/modals/edit-roles/edit-roles.component';
 import { EditUserComponent } from '../app/modals/edit-user/edit-user.component';
 import { AddCategoryComponent } from '../app/modals/add-category/add-category.component';
@@ -38,14 +38,14 @@ import { RemoveCategoryComponent } from '../app/modals/remove-category/remove-ca
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AddUserComponent, RemoveUserComponent, EditPermissionsComponent, EditRolesComponent, EditUserComponent,
+    AddUserComponent, RemoveUserComponent, EditUserPermissionsComponent, EditRolesComponent, EditUserComponent,
     AddCategoryComponent, EditCategoryComponent, RemoveCategoryComponent
   ],
   providers: [
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    AddUserComponent, RemoveUserComponent, EditPermissionsComponent, EditRolesComponent, EditUserComponent,
+    AddUserComponent, RemoveUserComponent, EditUserPermissionsComponent, EditRolesComponent, EditUserComponent,
     AddCategoryComponent, EditCategoryComponent, RemoveCategoryComponent
   ]
 })

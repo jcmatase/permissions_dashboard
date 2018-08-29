@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddUserComponent } from '../modals/add-user/add-user.component';
 import { RemoveUserComponent } from '../modals/remove-user/remove-user.component';
-import { EditPermissionsComponent } from '../modals/edit-permissions/edit-permissions.component';
+import { EditUserPermissionsComponent } from '../modals/edit-user-permissions/dashboard';
 import { EditRolesComponent } from '../modals/edit-roles/edit-roles.component';
 import { EditUserComponent } from '../modals/edit-user/edit-user.component';
 
@@ -188,7 +188,7 @@ export class UsersComponent implements OnInit {
       title: "User Permissions for: ",
       user: pUser
     };
-    const dialogRef = this.removeUserDialog.open(EditPermissionsComponent, dialogConfig);
+    const dialogRef = this.removeUserDialog.open(EditUserPermissionsComponent, dialogConfig);
     dialogConfig.position = {
       top: '0',
       left: '0'

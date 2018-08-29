@@ -9,10 +9,10 @@ export interface Category {
 
 @Component({
   selector: 'table-filtering-example',
-  styleUrls: ['./edit-permissions.component.scss'],
-  templateUrl: './edit-permissions.component.html',
+  styleUrls: ['./dashboard.scss'],
+  templateUrl: './dashboard.html',
 })
-export class EditPermissionsComponent {
+export class EditUserPermissionsComponent {
 
   displayedColumns: string[];
   dataSource: any;
