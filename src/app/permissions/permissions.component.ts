@@ -3,9 +3,7 @@ import { MatDialog, MatDialogConfig, MatTableDataSource, MAT_DIALOG_DATA } from 
 
 
 import { ToastrService } from 'ngx-toastr';
-import { AddCategoryComponent } from '../modals/add-category/add-category.component';
-import { EditCategoryComponent } from '../modals/edit-category/edit-category.component';
-import { RemoveCategoryComponent } from '../modals/remove-category/remove-category.component';
+import { RemovePermissionComponent } from '../modals/remove-permission/remove-permission.component';
 
 @Component({
     selector: 'permissions-list',
@@ -27,7 +25,8 @@ export class PermissionsComponent implements OnInit {
     }
 
     setPermissionsInfo() {
-        //TO-DO: when querying db select -permission id- as -permissionID-, -permission name- as -permissionName-, -category id- as -categoryID- and -category name- as -categoryName-
+        //TO-DO: when querying db select -permission id- as -permissionID-, -permission name- as -permissionName-, 
+        // -category id- as -categoryID- and -category name- as -categoryName-
         this.permissions = [
             {permissionID: 1, permissionName: "view_gateway", categoryID: 1, categoryName: "Krobots"},
             {permissionID: 2, permissionName: "edit_gateway", categoryID: 2, categoryName: "Krobots"},
@@ -57,8 +56,60 @@ export class PermissionsComponent implements OnInit {
         console.dir(permission);
     }
 
+
+    //    _____                                 _____                    _         _               __  __           _       _ 
+    //   |  __ \                               |  __ \                  (_)       (_)             |  \/  |         | |     | |
+    //   | |__) |___ _ __ ___   _____   _____  | |__) |__ _ __ _ __ ___  _ ___ ___ _  ___  _ __   | \  / | ___   __| | __ _| |
+    //   |  _  // _ \ '_ ` _ \ / _ \ \ / / _ \ |  ___/ _ \ '__| '_ ` _ \| / __/ __| |/ _ \| '_ \  | |\/| |/ _ \ / _` |/ _` | |
+    //   | | \ \  __/ | | | | | (_) \ V /  __/ | |  |  __/ |  | | | | | | \__ \__ \ | (_) | | | | | |  | | (_) | (_| | (_| | |
+    //   |_|  \_\___|_| |_| |_|\___/ \_/ \___| |_|   \___|_|  |_| |_| |_|_|___/___/_|\___/|_| |_| |_|  |_|\___/ \__,_|\__,_|_|
+    //                                                                                                                        
+    //                                                                                                                        
+
+    private removePermissionFromArray(permissionID) {
+        for(var categoryCounter = 0; categoryCounter < this.permissions.length; categoryCounter++){
+            if(this.permissions[categoryCounter]["permissionID"] === permissionID){
+                this.permissions.splice(categoryCounter, 1);
+                this.setTableDataSource();
+                return;
+            }
+        }
+    }
+
     openRemovePermissionModal(permission) {
-        console.dir(permission);
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = "415px";
+        dialogConfig.height = "240px";
+        dialogConfig.data = {
+            id: 2,
+            title: "Are you sure you want to remove permission: ",
+            permission: permission
+        };
+        const dialogRef = this.removeCategoryDialog.open(RemovePermissionComponent, dialogConfig);
+        dialogConfig.position = {
+            top: '0',
+            left: '0'
+        };
+
+        dialogRef.afterClosed().subscribe(result => {
+        });
+
+        dialogRef.backdropClick().subscribe(_ => {
+            dialogRef.close();
+        });
+
+        dialogRef.componentInstance.onRemovePermissionEvn.subscribe(notificationObj => {
+            if(notificationObj["status"]) {
+                this.removePermissionFromArray(notificationObj["permission"]["permissionID"]);
+                this.showNotification('top', 'right', "Permission: ", notificationObj["permission"]["permissionName"], notificationObj["msgStatus"], notificationObj["classType"]);
+                dialogRef.close();
+            }
+            else{
+
+            }
+        });
     }
 
 }
