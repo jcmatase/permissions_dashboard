@@ -21,6 +21,7 @@ import { AddCategoryComponent } from '../app/modals/add-category/add-category.co
 import { EditCategoryComponent } from '../app/modals/edit-category/edit-category.component';
 import { RemoveCategoryComponent } from '../app/modals/remove-category/remove-category.component';
 import { RemovePermissionComponent } from '../app/modals/remove-permission/remove-permission.component';
+import { AddPermissionComponent } from '../app/modals/add-permission/add-permission.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,7 @@ import { RemovePermissionComponent } from '../app/modals/remove-permission/remov
     AdminLayoutComponent,
     AddUserComponent, RemoveUserComponent, EditUserPermissionsComponent, EditUserRolesComponent, EditUserComponent,
     AddCategoryComponent, EditCategoryComponent, RemoveCategoryComponent,
-    RemovePermissionComponent
+    RemovePermissionComponent, AddPermissionComponent
   ],
   providers: [
   ],
@@ -49,7 +50,7 @@ import { RemovePermissionComponent } from '../app/modals/remove-permission/remov
   entryComponents: [
     AddUserComponent, RemoveUserComponent, EditUserPermissionsComponent, EditUserRolesComponent, EditUserComponent,
     AddCategoryComponent, EditCategoryComponent, RemoveCategoryComponent,
-    RemovePermissionComponent
+    RemovePermissionComponent, AddPermissionComponent
   ]
 })
 export class AppModule { }

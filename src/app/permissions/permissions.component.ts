@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig, MatTableDataSource, MAT_DIALOG_DATA } from 
 
 import { ToastrService } from 'ngx-toastr';
 import { RemovePermissionComponent } from '../modals/remove-permission/remove-permission.component';
+import { AddPermissionComponent } from '../modals/add-permission/add-permission.component';
 
 @Component({
     selector: 'permissions-list',
@@ -16,7 +17,7 @@ export class PermissionsComponent implements OnInit {
     displayedColumns: string[];
     dataSource: any;
 
-    constructor(private toastr: ToastrService, public addCategoryDialog: MatDialog, public editCategoryDialog: MatDialog, public removeCategoryDialog: MatDialog) { }
+    constructor(private toastr: ToastrService, public addPermissionDialog: MatDialog, public editPermissionDialog: MatDialog, public removePermissionDialog: MatDialog) { }
 
     ngOnInit() {
         this.displayedColumns = ['permissionName', 'categoryName', 'edit', 'remove'];
@@ -57,6 +58,68 @@ export class PermissionsComponent implements OnInit {
     }
 
 
+    //                _     _   _____                    _         _               __  __           _       _ 
+    //       /\      | |   | | |  __ \                  (_)       (_)             |  \/  |         | |     | |
+    //      /  \   __| | __| | | |__) |__ _ __ _ __ ___  _ ___ ___ _  ___  _ __   | \  / | ___   __| | __ _| |
+    //     / /\ \ / _` |/ _` | |  ___/ _ \ '__| '_ ` _ \| / __/ __| |/ _ \| '_ \  | |\/| |/ _ \ / _` |/ _` | |
+    //    / ____ \ (_| | (_| | | |  |  __/ |  | | | | | | \__ \__ \ | (_) | | | | | |  | | (_) | (_| | (_| | |
+    //   /_/    \_\__,_|\__,_| |_|   \___|_|  |_| |_| |_|_|___/___/_|\___/|_| |_| |_|  |_|\___/ \__,_|\__,_|_|
+    //                                                                                                        
+    //                                                                                                        
+
+    private addPermissionToArray(newPermission) {
+        console.dir(newPermission);
+        this.permissions.push(newPermission);
+        this.setTableDataSource();
+    }
+
+    private setPermissionCategoriesInfo(){
+        // Query all values in Permission_Category table
+        return [
+            {id: 1, name: "Krobots"},
+            {id: 2, name: "Finance"},
+            {id: 3, name: "Permission"},
+            {id: 4, name: "Other Category"},
+        ];
+    }
+    
+    openAddPermissionModal() {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = "415px";
+        dialogConfig.height = "280px";
+        dialogConfig.data = {
+            id: 1,
+            title: "Add Permission",
+            availablePermissionCategories: this.setPermissionCategoriesInfo()
+        };
+        const dialogRef = this.addPermissionDialog.open(AddPermissionComponent, dialogConfig);
+        dialogConfig.position = {
+            top: '0',
+            left: '0'
+        };
+
+        dialogRef.afterClosed().subscribe(result => {
+        });
+
+        dialogRef.backdropClick().subscribe(_ => {
+            dialogRef.close();
+        });
+
+        dialogRef.componentInstance.onAddPermissionEvn.subscribe(notificationObj => {
+            if(notificationObj["status"]) {
+                this.addPermissionToArray(notificationObj["permission"]);
+                this.showNotification('top', 'right', "Permission: ", notificationObj["permission"]["permissionName"], notificationObj["msgStatus"], notificationObj["classType"]);
+                dialogRef.close();
+            }
+            else{
+
+            }
+        });
+    }
+
+
     //    _____                                 _____                    _         _               __  __           _       _ 
     //   |  __ \                               |  __ \                  (_)       (_)             |  \/  |         | |     | |
     //   | |__) |___ _ __ ___   _____   _____  | |__) |__ _ __ _ __ ___  _ ___ ___ _  ___  _ __   | \  / | ___   __| | __ _| |
@@ -67,9 +130,9 @@ export class PermissionsComponent implements OnInit {
     //                                                                                                                        
 
     private removePermissionFromArray(permissionID) {
-        for(var categoryCounter = 0; categoryCounter < this.permissions.length; categoryCounter++){
-            if(this.permissions[categoryCounter]["permissionID"] === permissionID){
-                this.permissions.splice(categoryCounter, 1);
+        for(var permissionCounter = 0; permissionCounter < this.permissions.length; permissionCounter++){
+            if(this.permissions[permissionCounter]["permissionID"] === permissionID){
+                this.permissions.splice(permissionCounter, 1);
                 this.setTableDataSource();
                 return;
             }
@@ -87,7 +150,7 @@ export class PermissionsComponent implements OnInit {
             title: "Are you sure you want to remove permission: ",
             permission: permission
         };
-        const dialogRef = this.removeCategoryDialog.open(RemovePermissionComponent, dialogConfig);
+        const dialogRef = this.removePermissionDialog.open(RemovePermissionComponent, dialogConfig);
         dialogConfig.position = {
             top: '0',
             left: '0'
