@@ -5,6 +5,7 @@ import { MatDialog, MatDialogConfig, MatTableDataSource, MAT_DIALOG_DATA } from 
 import { ToastrService } from 'ngx-toastr';
 import { RemovePermissionComponent } from '../modals/remove-permission/remove-permission.component';
 import { AddPermissionComponent } from '../modals/add-permission/add-permission.component';
+import { EditPermissionComponent } from '../modals/edit-permission/edit-permission.component';
 
 @Component({
     selector: 'permissions-list',
@@ -30,11 +31,11 @@ export class PermissionsComponent implements OnInit {
         // -category id- as -categoryID- and -category name- as -categoryName-
         this.permissions = [
             {permissionID: 1, permissionName: "view_gateway", categoryID: 1, categoryName: "Krobots"},
-            {permissionID: 2, permissionName: "edit_gateway", categoryID: 2, categoryName: "Krobots"},
+            {permissionID: 2, permissionName: "edit_gateway", categoryID: 1, categoryName: "Krobots"},
+            {permissionID: 5, permissionName: "view_finance", categoryID: 2, categoryName: "Finance"},
+            {permissionID: 6, permissionName: "edit_finance", categoryID: 3, categoryName: "Finance"},
             {permissionID: 3, permissionName: "view_permissions", categoryID: 3, categoryName: "Permissions"},
-            {permissionID: 4, permissionName: "edit_permissions", categoryID: 4, categoryName: "Permissions"},
-            {permissionID: 5, permissionName: "view_finance", categoryID: 5, categoryName: "Finance"},
-            {permissionID: 6, permissionName: "edit_finance", categoryID: 6, categoryName: "Finance"}
+            {permissionID: 4, permissionName: "edit_permissions", categoryID: 3, categoryName: "Permissions"}
         ];
     }
 
@@ -52,11 +53,6 @@ export class PermissionsComponent implements OnInit {
             //toastClass: "alert alert-success alert-with-icon",
         });
     }
-
-    openEditPermissionModal(permission) {
-        console.dir(permission);
-    }
-
 
     //                _     _   _____                    _         _               __  __           _       _ 
     //       /\      | |   | | |  __ \                  (_)       (_)             |  \/  |         | |     | |
@@ -171,6 +167,80 @@ export class PermissionsComponent implements OnInit {
             }
             else{
 
+            }
+        });
+    }
+
+
+    //    ______    _ _ _     _____                    _         _               __  __           _       _ 
+    //   |  ____|  | (_) |   |  __ \                  (_)       (_)             |  \/  |         | |     | |
+    //   | |__   __| |_| |_  | |__) |__ _ __ _ __ ___  _ ___ ___ _  ___  _ __   | \  / | ___   __| | __ _| |
+    //   |  __| / _` | | __| |  ___/ _ \ '__| '_ ` _ \| / __/ __| |/ _ \| '_ \  | |\/| |/ _ \ / _` |/ _` | |
+    //   | |___| (_| | | |_  | |  |  __/ |  | | | | | | \__ \__ \ | (_) | | | | | |  | | (_) | (_| | (_| | |
+    //   |______\__,_|_|\__| |_|   \___|_|  |_| |_| |_|_|___/___/_|\___/|_| |_| |_|  |_|\___/ \__,_|\__,_|_|
+    //                                                                                                      
+    //                                                                                                      
+
+
+    /*
+        Parameters:
+            oldPermissionObj = {categoryID: 3, categoryName: "Finance", permissionID: 6, permissionName: "edit_finance"}
+            newPermissionName = "New Name"
+            categoryObj = {id: 2, name: "Finance"}
+    */
+    private editPermissionFromArray(oldPermissionObj, newPermissionName, categoryObj) {
+        for(var permissionCounter = 0; permissionCounter < this.permissions.length; permissionCounter++){
+            var permissionInArray = this.permissions[permissionCounter];
+            if(permissionInArray["permissionID"] === oldPermissionObj["permissionID"]){
+                if(newPermissionName !== '') {
+                    permissionInArray["permissionName"] = newPermissionName;
+                }
+                if(categoryObj !== '' && categoryObj !== {}) {
+                    permissionInArray["categoryID"] = categoryObj["id"];
+                    permissionInArray["categoryName"] = categoryObj["name"];
+                }
+                this.setTableDataSource();
+                return;
+            }
+        }
+    }
+
+    openEditPermissionModal(permission) {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = "415px";
+        dialogConfig.height = "320px";
+        dialogConfig.data = {
+            id: 2,
+            title: "Edit Permission",
+            currentPermission: permission,
+            availablePermissionCategories: this.setPermissionCategoriesInfo()
+        };
+        const dialogRef = this.removePermissionDialog.open(EditPermissionComponent, dialogConfig);
+        dialogConfig.position = {
+            top: '0',
+            left: '0'
+        };
+
+        dialogRef.afterClosed().subscribe(result => {
+        });
+
+        dialogRef.backdropClick().subscribe(_ => {
+            dialogRef.close();
+        });
+
+        dialogRef.componentInstance.onEditPermissionEvn.subscribe(notificationObj => {
+            if(notificationObj["status"] === 100) {
+                this.showNotification('top', 'right', "Permission: ", notificationObj["permission"]["permissionName"], notificationObj["msgStatus"], notificationObj["classType"]);
+            }
+            if(notificationObj["status"] === 0) {
+
+            }
+            if(notificationObj["status"] === 1) {
+                this.editPermissionFromArray(notificationObj["permission"], notificationObj["newPermissionName"], notificationObj["newPermissionCategory"]);
+                this.showNotification('top', 'right', "Permission: ", notificationObj["permission"]["permissionName"], notificationObj["msgStatus"], notificationObj["classType"]);
+                dialogRef.close();
             }
         });
     }

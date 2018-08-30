@@ -1,0 +1,26 @@
+<h2 class="matTitle" mat-dialog-title>{{modalTitle}}</h2>
+<button class="closeBtn" mat-button mat-dialog-close mat-mini-fab color="warn">X</button>
+
+<form [formGroup]="userFormGroup" (ngSubmit)="handleSubmit()">
+
+  <div class="form-group">
+
+    <div class="permissionNameInput">
+        <label for="permissionName" class="label-control">Name:</label>
+        <input formControlName="permissionName" placeholder={{currentPermission.permissionName}} class="form-control">
+    </div>
+
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Category" matInput formControlName="permissionCategory">
+          <mat-option *ngFor="let availablePermissionCategory of availablePermissionCategories" [value]="availablePermissionCategory">
+            {{ availablePermissionCategory.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </div>
+
+  <button class="btn btn-primary editPermissionBtn"> Edit </button>
+</form>
