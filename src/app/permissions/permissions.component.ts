@@ -88,7 +88,7 @@ export class PermissionsComponent implements OnInit {
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
         dialogConfig.width = "415px";
-        dialogConfig.height = "280px";
+        dialogConfig.height = "320px";
         dialogConfig.data = {
             id: 1,
             title: "Add Permission",

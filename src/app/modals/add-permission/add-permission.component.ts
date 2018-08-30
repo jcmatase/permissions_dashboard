@@ -24,13 +24,12 @@ export class AddPermissionComponent implements OnInit {
 
   ngOnInit() {
     this.initFormGroup();
-    console.dir(this.availablePermissionCategories);
-    // add dropdown field with this.availablePermissionCategories
   }
 
   initFormGroup() {
     this.userFormGroup = this.formBuilder.group({
-      'permissionName': this.formBuilder.control('', Validators.required)
+      'permissionName': this.formBuilder.control('', Validators.required),
+      'permissionCategory': this.formBuilder.control('', Validators.required)
     });
   }
 
@@ -38,11 +37,21 @@ export class AddPermissionComponent implements OnInit {
     return this.userFormGroup.get('permissionName');
   }
 
+  get permissionCategory() {
+    return this.userFormGroup.get('permissionCategory');
+  }
+
+  printSelectedCategoryValue(value) {
+    console.dir(value);
+  }
+
   handleSubmit() {
     alert("Values are correct. Let's validate them");
     this.newPermission = {
       "permissionID" : 100,
-      "permissionName" : this.userFormGroup.value.permissionName
+      "permissionName" : this.userFormGroup.value.permissionName,
+      "categoryID" : this.userFormGroup.value.permissionCategory.id,
+      "categoryName" : this.userFormGroup.value.permissionCategory.name,
     };
     var httpResultStatus = 1;
     var httpResultMsg = " was added.";

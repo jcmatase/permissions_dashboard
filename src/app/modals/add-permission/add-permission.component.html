@@ -4,14 +4,28 @@
 <form [formGroup]="userFormGroup" (ngSubmit)="handleSubmit()">
 
   <div class="form-group">
-    <label for="permissionName" class="label-control">Name:</label>
-    <input formControlName="permissionName" class="form-control" required>
-    <div *ngIf="permissionName.invalid && permissionName.touched">
-      <div *ngIf="permissionName.errors.required">
-        <span style="color:red" ng-show="myForm.pin.$error.pattern">Permission name is required</span>
-      </div>
+
+    <div class="permissionNameInput">
+        <label for="permissionName" class="label-control">Name:</label>
+        <input formControlName="permissionName" class="form-control" required>
+        <div *ngIf="permissionName.invalid && permissionName.touched">
+          <div *ngIf="permissionName.errors.required">
+            <span style="color:red" ng-show="myForm.pin.$error.pattern">Permission name is required</span>
+          </div>
+        </div>
     </div>
+
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Category" matInput formControlName="permissionCategory" required>
+          <mat-option *ngFor="let availablePermissionCategory of availablePermissionCategories" [value]="availablePermissionCategory">
+            {{ availablePermissionCategory.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
   </div>
 
-  <button class="btn btn-primary" [disabled]="! userFormGroup.valid"> Add </button>
+  <button class="btn btn-primary addPermissionBtn" [disabled]="! userFormGroup.valid"> Add </button>
 </form>
