@@ -14,28 +14,28 @@ import { RemoveCategoryComponent } from '../modals/remove-category/remove-catego
     providers: []
 })
 export class RolesComponent implements OnInit {
-    permissionCategories: Array<any>;
+    roles: Array<any>;
     displayedColumns: string[];
     dataSource: any;
 
-    constructor(private toastr: ToastrService, public addCategoryDialog: MatDialog, public editCategoryDialog: MatDialog, public removeCategoryDialog: MatDialog) { }
+    constructor(private toastr: ToastrService, public addRoleDialog: MatDialog, public editRoleDialog: MatDialog, public removeRoleDialog: MatDialog) { }
 
     ngOnInit() {
         this.displayedColumns = ['name', 'edit', 'remove'];
-        this.setPermissionCategoriesInfo();
+        this.setRolesInfo();
         this.setTableDataSource();
     }
 
-    setPermissionCategoriesInfo() {
-        this.permissionCategories = [
-            {id: 1, name: "Krobots"},
-            {id: 2, name: "Permissions"},
-            {id: 3, name: "Finance"}
+    setRolesInfo() {
+        this.roles = [
+            {id: 1, name: "Admin"},
+            {id: 2, name: "Finance"},
+            {id: 3, name: "Media"}
         ];
     }
 
     private setTableDataSource() {
-        this.dataSource = new MatTableDataSource(this.permissionCategories);
+        this.dataSource = new MatTableDataSource(this.roles);
     }
 
     private showNotification(from, align, msg1, boldMsg, msg2, classType) {
@@ -48,25 +48,26 @@ export class RolesComponent implements OnInit {
             //toastClass: "alert alert-success alert-with-icon",
         });
     }
-  
-    //                _     _    _____      _                                _____  _       _             
-    //       /\      | |   | |  / ____|    | |                              |  __ \(_)     | |            
-    //      /  \   __| | __| | | |     __ _| |_ ___  __ _  ___  _ __ _   _  | |  | |_  __ _| | ___   __ _ 
-    //     / /\ \ / _` |/ _` | | |    / _` | __/ _ \/ _` |/ _ \| '__| | | | | |  | | |/ _` | |/ _ \ / _` |
-    //    / ____ \ (_| | (_| | | |___| (_| | ||  __/ (_| | (_) | |  | |_| | | |__| | | (_| | | (_) | (_| |
-    //   /_/    \_\__,_|\__,_|  \_____\__,_|\__\___|\__, |\___/|_|   \__, | |_____/|_|\__,_|_|\___/ \__, |
-    //                                               __/ |            __/ |                          __/ |
-    //                                              |___/            |___/                          |___/ 
+
+
+    //                _     _   _____       _        __  __           _       _ 
+    //       /\      | |   | | |  __ \     | |      |  \/  |         | |     | |
+    //      /  \   __| | __| | | |__) |___ | | ___  | \  / | ___   __| | __ _| |
+    //     / /\ \ / _` |/ _` | |  _  // _ \| |/ _ \ | |\/| |/ _ \ / _` |/ _` | |
+    //    / ____ \ (_| | (_| | | | \ \ (_) | |  __/ | |  | | (_) | (_| | (_| | |
+    //   /_/    \_\__,_|\__,_| |_|  \_\___/|_|\___| |_|  |_|\___/ \__,_|\__,_|_|
+    //                                                                          
+    //                                                                          
 
     
     
-    private addCategoryToArray(newCategory) {
-        console.dir(newCategory);
-        this.permissionCategories.push(newCategory);
+    private addRoleToArray(newRole) {
+        console.dir(newRole);
+        this.roles.push(newRole);
         this.setTableDataSource();
     }
     
-    openAddCategory() {
+    openAddRole() {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
@@ -74,9 +75,9 @@ export class RolesComponent implements OnInit {
         dialogConfig.height = "280px";
         dialogConfig.data = {
             id: 1,
-            title: "Add Category"
+            title: "Add Role"
         };
-        const dialogRef = this.addCategoryDialog.open(AddCategoryComponent, dialogConfig);
+        const dialogRef = this.addRoleDialog.open(AddCategoryComponent, dialogConfig);
         dialogConfig.position = {
             top: '0',
             left: '0'
@@ -91,8 +92,8 @@ export class RolesComponent implements OnInit {
 
         dialogRef.componentInstance.onAddCategoryEvn.subscribe(notificationObj => {
             if(notificationObj["status"]) {
-                this.addCategoryToArray(notificationObj["category"]);
-                this.showNotification('top', 'right', "Category: ", notificationObj["category"]["name"], notificationObj["msgStatus"], notificationObj["classType"]);
+                this.addRoleToArray(notificationObj["role"]);
+                this.showNotification('top', 'right', "Role: ", notificationObj["role"]["name"], notificationObj["msgStatus"], notificationObj["classType"]);
                 dialogRef.close();
             }
             else{
@@ -102,27 +103,28 @@ export class RolesComponent implements OnInit {
     }
 
 
-    //    ______    _ _ _      _____      _                                _____  _       _             
-    //   |  ____|  | (_) |    / ____|    | |                              |  __ \(_)     | |            
-    //   | |__   __| |_| |_  | |     __ _| |_ ___  __ _  ___  _ __ _   _  | |  | |_  __ _| | ___   __ _ 
-    //   |  __| / _` | | __| | |    / _` | __/ _ \/ _` |/ _ \| '__| | | | | |  | | |/ _` | |/ _ \ / _` |
-    //   | |___| (_| | | |_  | |___| (_| | ||  __/ (_| | (_) | |  | |_| | | |__| | | (_| | | (_) | (_| |
-    //   |______\__,_|_|\__|  \_____\__,_|\__\___|\__, |\___/|_|   \__, | |_____/|_|\__,_|_|\___/ \__, |
-    //                                             __/ |            __/ |                          __/ |
-    //                                            |___/            |___/                          |___/ 
+    //    ______    _ _ _     _____       _        __  __           _       _ 
+    //   |  ____|  | (_) |   |  __ \     | |      |  \/  |         | |     | |
+    //   | |__   __| |_| |_  | |__) |___ | | ___  | \  / | ___   __| | __ _| |
+    //   |  __| / _` | | __| |  _  // _ \| |/ _ \ | |\/| |/ _ \ / _` |/ _` | |
+    //   | |___| (_| | | |_  | | \ \ (_) | |  __/ | |  | | (_) | (_| | (_| | |
+    //   |______\__,_|_|\__| |_|  \_\___/|_|\___| |_|  |_|\___/ \__,_|\__,_|_|
+    //                                                                        
+    //                                                                        
 
-    
-    private editCategory(categoryUpdated) {
-        for(var categoryCounter = 0; categoryCounter < this.permissionCategories.length; categoryCounter++){
-            var currentCategory = this.permissionCategories[categoryCounter];
-            if(currentCategory["id"] === categoryUpdated["id"]){
-                currentCategory["name"] = categoryUpdated["name"];
+
+
+    private editRole(roleUpdated) {
+        for(var roleCounter = 0; roleCounter < this.roles.length; roleCounter++){
+            var currentRole = this.roles[roleCounter];
+            if(currentRole["id"] === roleUpdated["id"]){
+                currentRole["name"] = roleUpdated["name"];
                 return;
             }
         }
     }
     
-    openEditCategoryModal(category) {
+    openEditRoleModal(role) {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
@@ -130,10 +132,10 @@ export class RolesComponent implements OnInit {
         dialogConfig.height = "280px";
         dialogConfig.data = {
             id: 2,
-            title: "Edit Category",
-            category: category
+            title: "Edit Role",
+            role: role
         };
-        const dialogRef = this.editCategoryDialog.open(EditCategoryComponent, dialogConfig);
+        const dialogRef = this.editRoleDialog.open(EditCategoryComponent, dialogConfig);
         dialogConfig.position = {
             top: '0',
             left: '0'
@@ -148,8 +150,8 @@ export class RolesComponent implements OnInit {
 
         dialogRef.componentInstance.onEditCategoryEvn.subscribe(notificationObj => {
             if(notificationObj["status"]) {
-                this.editCategory(notificationObj["category"]);
-                this.showNotification('top', 'right', "Category: ", notificationObj["category"]["name"], notificationObj["msgStatus"], notificationObj["classType"]);
+                this.editRole(notificationObj["role"]);
+                this.showNotification('top', 'right', "Role: ", notificationObj["role"]["name"], notificationObj["msgStatus"], notificationObj["classType"]);
                 dialogRef.close();
             }
             else{
@@ -158,28 +160,27 @@ export class RolesComponent implements OnInit {
         });
     }
 
+    //    _____                                 _____       _        __  __           _       _ 
+    //   |  __ \                               |  __ \     | |      |  \/  |         | |     | |
+    //   | |__) |___ _ __ ___   _____   _____  | |__) |___ | | ___  | \  / | ___   __| | __ _| |
+    //   |  _  // _ \ '_ ` _ \ / _ \ \ / / _ \ |  _  // _ \| |/ _ \ | |\/| |/ _ \ / _` |/ _` | |
+    //   | | \ \  __/ | | | | | (_) \ V /  __/ | | \ \ (_) | |  __/ | |  | | (_) | (_| | (_| | |
+    //   |_|  \_\___|_| |_| |_|\___/ \_/ \___| |_|  \_\___/|_|\___| |_|  |_|\___/ \__,_|\__,_|_|
+    //                                                                                          
+    //                                                                                          
 
-    //    _____                                  _____      _                                _____  _       _             
-    //   |  __ \                                / ____|    | |                              |  __ \(_)     | |            
-    //   | |__) |___ _ __ ___   _____   _____  | |     __ _| |_ ___  __ _  ___  _ __ _   _  | |  | |_  __ _| | ___   __ _ 
-    //   |  _  // _ \ '_ ` _ \ / _ \ \ / / _ \ | |    / _` | __/ _ \/ _` |/ _ \| '__| | | | | |  | | |/ _` | |/ _ \ / _` |
-    //   | | \ \  __/ | | | | | (_) \ V /  __/ | |___| (_| | ||  __/ (_| | (_) | |  | |_| | | |__| | | (_| | | (_) | (_| |
-    //   |_|  \_\___|_| |_| |_|\___/ \_/ \___|  \_____\__,_|\__\___|\__, |\___/|_|   \__, | |_____/|_|\__,_|_|\___/ \__, |
-    //                                                               __/ |            __/ |                          __/ |
-    //                                                              |___/            |___/                          |___/ 
 
-
-    private removeCategoryFromArray(id) {
-        for(var categoryCounter = 0; categoryCounter < this.permissionCategories.length; categoryCounter++){
-            if(this.permissionCategories[categoryCounter]["id"] === id){
-                this.permissionCategories.splice(categoryCounter, 1);
+    private removeRoleFromArray(id) {
+        for(var roleCounter = 0; roleCounter < this.roles.length; roleCounter++){
+            if(this.roles[roleCounter]["id"] === id){
+                this.roles.splice(roleCounter, 1);
                 this.setTableDataSource();
                 return;
             }
         }
     }
 
-    openRemoveCategoryModal(category) {
+    openRemoveRoleModal(role) {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
@@ -187,10 +188,10 @@ export class RolesComponent implements OnInit {
         dialogConfig.height = "240px";
         dialogConfig.data = {
             id: 2,
-            title: "Are you sure you want to remove category: ",
-            category: category
+            title: "Are you sure you want to remove role: ",
+            role: role
         };
-        const dialogRef = this.removeCategoryDialog.open(RemoveCategoryComponent, dialogConfig);
+        const dialogRef = this.removeRoleDialog.open(RemoveCategoryComponent, dialogConfig);
         dialogConfig.position = {
             top: '0',
             left: '0'
@@ -205,8 +206,8 @@ export class RolesComponent implements OnInit {
 
         dialogRef.componentInstance.onRemoveCategoryEvn.subscribe(notificationObj => {
             if(notificationObj["status"]) {
-                this.removeCategoryFromArray(notificationObj["category"]["id"]);
-                this.showNotification('top', 'right', "Category: ", notificationObj["category"]["name"], notificationObj["msgStatus"], notificationObj["classType"]);
+                this.removeRoleFromArray(notificationObj["role"]["id"]);
+                this.showNotification('top', 'right', "Role: ", notificationObj["role"]["name"], notificationObj["msgStatus"], notificationObj["classType"]);
                 dialogRef.close();
             }
             else{
