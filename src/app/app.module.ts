@@ -52,10 +52,10 @@ import { EditRoleComponent } from '../app/modals/edit-role/edit-role.component';
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    AddUserComponent, RemoveUserComponent, EditUserPermissionsComponent, EditUserRolesComponent, EditUserComponent,
-    AddCategoryComponent, EditCategoryComponent, RemoveCategoryComponent,
-    RemovePermissionComponent, AddPermissionComponent, EditPermissionComponent,
-    AddRoleComponent, EditRoleComponent
+    AddUserComponent, EditUserComponent, EditUserRolesComponent, EditUserPermissionsComponent, RemoveUserComponent,
+    AddPermissionComponent, EditPermissionComponent, RemovePermissionComponent,
+    AddRoleComponent, EditRoleComponent,
+    AddCategoryComponent, EditCategoryComponent, RemoveCategoryComponent
   ]
 })
 export class AppModule { }
