@@ -5,7 +5,7 @@ import { MatDialog, MatDialogConfig, MatTableDataSource, MAT_DIALOG_DATA } from 
 import { ToastrService } from 'ngx-toastr';
 import { AddRoleComponent } from '../modals/add-role/add-role.component';
 import { EditRoleComponent } from '../modals/edit-role/edit-role.component';
-import { RemoveCategoryComponent } from '../modals/remove-category/remove-category.component';
+import { RemoveRoleComponent } from '../modals/remove-role/remove-role.component';
 
 @Component({
     selector: 'roles-list',
@@ -191,7 +191,7 @@ export class RolesComponent implements OnInit {
             title: "Are you sure you want to remove role: ",
             role: role
         };
-        const dialogRef = this.removeRoleDialog.open(RemoveCategoryComponent, dialogConfig);
+        const dialogRef = this.removeRoleDialog.open(RemoveRoleComponent, dialogConfig);
         dialogConfig.position = {
             top: '0',
             left: '0'
@@ -204,7 +204,7 @@ export class RolesComponent implements OnInit {
             dialogRef.close();
         });
 
-        dialogRef.componentInstance.onRemoveCategoryEvn.subscribe(notificationObj => {
+        dialogRef.componentInstance.onRemoveRoleEvn.subscribe(notificationObj => {
             if(notificationObj["status"]) {
                 this.removeRoleFromArray(notificationObj["role"]["id"]);
                 this.showNotification('top', 'right', "Role: ", notificationObj["role"]["name"], notificationObj["msgStatus"], notificationObj["classType"]);

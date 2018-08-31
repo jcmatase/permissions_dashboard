@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>{{ modalTitle }}</h2>
+<span class="removeRoleName">{{ role.name }}</span>
+<mat-dialog-content>
+</mat-dialog-content>
+<mat-dialog-actions>
+ <button mat-button mat-dialog-close class="removeRoleNoBtn">No</button>
+ <button mat-button mat-raised-button color="primary" class="removeRoleYesBtn" (click)="startRemovingUser()">Yes</button>
+</mat-dialog-actions>
