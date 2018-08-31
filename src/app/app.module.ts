@@ -13,16 +13,17 @@ import { MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule, M
 
 // Modals
 import { AddUserComponent } from '../app/modals/add-user/add-user.component';
+import { EditUserComponent } from '../app/modals/edit-user/edit-user.component';
 import { RemoveUserComponent } from '../app/modals/remove-user/remove-user.component';
 import { EditUserPermissionsComponent } from '../app/modals/edit-user-permissions/dashboard';
 import { EditUserRolesComponent } from '../app/modals/edit-user-roles/edit-roles.component';
-import { EditUserComponent } from '../app/modals/edit-user/edit-user.component';
 import { AddCategoryComponent } from '../app/modals/add-category/add-category.component';
 import { EditCategoryComponent } from '../app/modals/edit-category/edit-category.component';
 import { RemoveCategoryComponent } from '../app/modals/remove-category/remove-category.component';
-import { RemovePermissionComponent } from '../app/modals/remove-permission/remove-permission.component';
 import { AddPermissionComponent } from '../app/modals/add-permission/add-permission.component';
 import { EditPermissionComponent } from '../app/modals/edit-permission/edit-permission.component';
+import { RemovePermissionComponent } from '../app/modals/remove-permission/remove-permission.component';
+import { AddRoleComponent } from '../app/modals/add-role/add-role.component';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { EditPermissionComponent } from '../app/modals/edit-permission/edit-perm
     AdminLayoutComponent,
     AddUserComponent, RemoveUserComponent, EditUserPermissionsComponent, EditUserRolesComponent, EditUserComponent,
     AddCategoryComponent, EditCategoryComponent, RemoveCategoryComponent,
-    RemovePermissionComponent, AddPermissionComponent, EditPermissionComponent
+    RemovePermissionComponent, AddPermissionComponent, EditPermissionComponent,
+    AddRoleComponent
   ],
   providers: [
   ],
@@ -51,7 +53,8 @@ import { EditPermissionComponent } from '../app/modals/edit-permission/edit-perm
   entryComponents: [
     AddUserComponent, RemoveUserComponent, EditUserPermissionsComponent, EditUserRolesComponent, EditUserComponent,
     AddCategoryComponent, EditCategoryComponent, RemoveCategoryComponent,
-    RemovePermissionComponent, AddPermissionComponent, EditPermissionComponent
+    RemovePermissionComponent, AddPermissionComponent, EditPermissionComponent,
+    AddRoleComponent
   ]
 })
 export class AppModule { }

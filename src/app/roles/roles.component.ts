@@ -3,7 +3,7 @@ import { MatDialog, MatDialogConfig, MatTableDataSource, MAT_DIALOG_DATA } from 
 
 
 import { ToastrService } from 'ngx-toastr';
-import { AddCategoryComponent } from '../modals/add-category/add-category.component';
+import { AddRoleComponent } from '../modals/add-role/add-role.component';
 import { EditCategoryComponent } from '../modals/edit-category/edit-category.component';
 import { RemoveCategoryComponent } from '../modals/remove-category/remove-category.component';
 
@@ -77,7 +77,7 @@ export class RolesComponent implements OnInit {
             id: 1,
             title: "Add Role"
         };
-        const dialogRef = this.addRoleDialog.open(AddCategoryComponent, dialogConfig);
+        const dialogRef = this.addRoleDialog.open(AddRoleComponent, dialogConfig);
         dialogConfig.position = {
             top: '0',
             left: '0'
@@ -90,7 +90,7 @@ export class RolesComponent implements OnInit {
             dialogRef.close();
         });
 
-        dialogRef.componentInstance.onAddCategoryEvn.subscribe(notificationObj => {
+        dialogRef.componentInstance.onAddRoleEvn.subscribe(notificationObj => {
             if(notificationObj["status"]) {
                 this.addRoleToArray(notificationObj["role"]);
                 this.showNotification('top', 'right', "Role: ", notificationObj["role"]["name"], notificationObj["msgStatus"], notificationObj["classType"]);
