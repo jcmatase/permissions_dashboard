@@ -1,0 +1,17 @@
+<h2 class="matTitle" mat-dialog-title>{{modalTitle}}</h2>
+<button class="closeBtn" mat-button mat-dialog-close mat-mini-fab color="warn">X</button>
+
+<form [formGroup]="editRoleFormGroup" (ngSubmit)="handleSubmit()">
+
+  <div class="form-group">
+    <label for="name" class="label-control">Name:</label>
+    <input formControlName="name" placeholder={{currentRole.name}} class="form-control" required>
+    <div *ngIf="name.invalid && name.touched">
+      <div *ngIf="name.errors.required">
+        <span style="color:red" ng-show="myForm.pin.$error.pattern">Role Name is required</span>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary editRoleBtn" [disabled]="! editRoleFormGroup.valid"> Edit </button>
+</form>
