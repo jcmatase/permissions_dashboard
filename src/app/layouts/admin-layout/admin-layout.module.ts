@@ -11,6 +11,7 @@ import { PermissionsComponent } from '../../permissions/permissions.component';
 import { PermissionCategoryComponent } from '../../permission_category/permission_category.component';
 import { IconsComponent } from '../../icons/icons.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
+import { RolesComponent } from '../../roles/roles.component';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
@@ -32,7 +33,8 @@ import { ToastrModule } from 'ngx-toastr';
     PermissionCategoryComponent,
     DashboardComponent,
     IconsComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    RolesComponent
   ]
 })
 
