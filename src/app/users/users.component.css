@@ -1,23 +1,20 @@
-table, th , td  {
-    border: 1px solid grey;
-    border-collapse: collapse;
-    padding: 5px;
+table {
+    width: 100%;
     text-align: center;
 }
 
-table tr:nth-child(odd) {
-    background-color: #f1f1f1;
-}
-
-table tr:nth-child(even) {
-    background-color: #ffffff;
+.add-user-btn {
+    margin-left: 15px;
 }
 
 .clean-button {
     background-color: transparent;
     color: black;
+    outline: none;
 }
 
-.add-user-btn {
-    margin-left: 15px;
+.centerThValues {
+    text-align:center;
+    font-weight: bold;
+    font-size: medium;
 }

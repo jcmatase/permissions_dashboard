@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatTableDataSource, MAT_DIALOG_DATA } from '@angular/material';
 import { AddUserComponent } from '../modals/add-user/add-user.component';
 import { RemoveUserComponent } from '../modals/remove-user/remove-user.component';
 import { EditUserPermissionsComponent } from '../modals/edit-user-permissions/dashboard';
@@ -15,13 +15,16 @@ import { EditUserComponent } from '../modals/edit-user/edit-user.component';
   providers: []
 })
 export class UsersComponent implements OnInit {
-
   users: Array<any>;
+  displayedColumns: string[];
+  dataSource: any;
 
   constructor(private toastr: ToastrService, public dialog: MatDialog, public removeUserDialog: MatDialog) { }
 
   ngOnInit() {
+    this.displayedColumns = ['username', 'email', 'name', 'edit_user', 'edit_roles', 'edit_permissions', 'remove'];
     this.setUsersInfo();
+    this.setTableDataSource();
   }
 
   private setUsersInfo(){
@@ -59,6 +62,10 @@ export class UsersComponent implements OnInit {
     ];
   }
 
+  private setTableDataSource() {
+    this.dataSource = new MatTableDataSource(this.users);
+  }
+
   private showNotification(from, align, msg1, boldMsg, msg2, classType) {
     this.toastr.success('<span class="now-ui-icons ui-1_bell-53"></span>' + msg1 + '<b>' + boldMsg + '</b> ' + msg2 , '', {
       timeOut: 2000,
@@ -70,20 +77,6 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  private removeUserFromArray(id) {
-    for(var userCounter = 0; userCounter < this.users.length; userCounter++){
-      if(this.users[userCounter]["id"] === id){
-        this.users.splice(userCounter, 1);
-        return;
-      }
-    }
-  }
-
-  private addUserToArray(newUser) {
-    this.users.push(newUser);
-  }
-
-
   //                _     _   _    _                 __  __           _       _ 
   //       /\      | |   | | | |  | |               |  \/  |         | |     | |
   //      /  \   __| | __| | | |  | |___  ___ _ __  | \  / | ___   __| | __ _| |
@@ -92,7 +85,12 @@ export class UsersComponent implements OnInit {
   //   /_/    \_\__,_|\__,_|  \____/|___/\___|_|    |_|  |_|\___/ \__,_|\__,_|_|
   //                                                                            
   //                                                                            
-  
+
+  private addUserToArray(newUser) {
+    this.users.push(newUser);
+    this.setTableDataSource();
+  }
+
   openAddUserModal() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -136,6 +134,17 @@ export class UsersComponent implements OnInit {
   //   |_|  \_\___|_| |_| |_|\___/ \_/ \___|  \____/|___/\___|_|    |_|  |_|\___/ \__,_|\__,_|_|
   //                                                                                            
   //                                                                                            
+
+  private removeUserFromArray(id) {
+    for(var userCounter = 0; userCounter < this.users.length; userCounter++){
+      if(this.users[userCounter]["id"] === id){
+        this.users.splice(userCounter, 1);
+        this.setTableDataSource();
+        return;
+      }
+    }
+  }
+
 
   openRemoveUserModal(pUser) {
     const dialogConfig = new MatDialogConfig();
