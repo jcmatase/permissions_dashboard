@@ -1,7 +1,6 @@
 {
   "name": "permissions-manager-dashboard",
   "version": "1.0.0",
-  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
