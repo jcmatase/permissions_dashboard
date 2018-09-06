@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { LoginComponent } from './login/login.component';
 import { MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatCheckboxModule, MatSelectModule} from '@angular/material';
 
 
@@ -47,7 +48,7 @@ import { RemoveRoleComponent } from '../app/modals/remove-role/remove-role.compo
     AddUserComponent, EditUserComponent, EditUserRolesComponent, EditUserPermissionsComponent, RemoveUserComponent ,
     AddCategoryComponent, EditCategoryComponent, RemoveCategoryComponent,
     AddPermissionComponent, EditPermissionComponent, RemovePermissionComponent,
-    AddRoleComponent, EditRoleComponent, RemoveRoleComponent
+    AddRoleComponent, EditRoleComponent, RemoveRoleComponent, LoginComponent
   ],
   providers: [
   ],
