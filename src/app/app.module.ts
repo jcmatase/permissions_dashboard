@@ -28,6 +28,9 @@ import { AddRoleComponent } from '../app/modals/add-role/add-role.component';
 import { EditRoleComponent } from '../app/modals/edit-role/edit-role.component';
 import { RemoveRoleComponent } from '../app/modals/remove-role/remove-role.component';
 
+// Services
+import { AuthService } from '../app/services/auth.service';
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -51,6 +54,7 @@ import { RemoveRoleComponent } from '../app/modals/remove-role/remove-role.compo
     AddRoleComponent, EditRoleComponent, RemoveRoleComponent, LoginComponent
   ],
   providers: [
+    AuthService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
