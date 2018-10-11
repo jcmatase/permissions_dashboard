@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser() {
+    this.Auth.getUserDetails(this.username.value, this.password.value);
     console.log("username: " + this.username.value, "password: " + this.password.value);
   }
 
