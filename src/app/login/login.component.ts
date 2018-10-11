@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
     return this.userFormGroup.get('password');
   }
 
-  handleSubmit() {
-    console.log(this.username, this.password);
+  loginUser() {
+    console.log("username: " + this.username.value, "password: " + this.password.value);
   }
 
 

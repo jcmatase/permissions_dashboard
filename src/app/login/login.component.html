@@ -1,6 +1,6 @@
 <h2 class="matTitle" mat-dialog-title>Login</h2>
 
-<form class="" [formGroup]="userFormGroup" (ngSubmit)="handleSubmit()">
+<form class="formContent" [formGroup]="userFormGroup" (ngSubmit)="loginUser()">
 
   <div class="form-group">
     <label for="username" class="label-control">Username</label>
@@ -15,7 +15,7 @@
 
   <div class="form-group">
       <label for="password" class="label-control">Password</label>
-      <input formControlName="password" class="form-control input-size" required>
+      <input type="password" formControlName="password" class="form-control input-size" required>
       <div *ngIf="password.invalid && password.touched">
         <div *ngIf="password.errors.required">
           <span style="color:red" ng-show="myForm.pin.$error.pattern">Password is required</span>
@@ -23,5 +23,5 @@
       </div>
     </div>
 
-  <button class="btn btn-primary addRoleBtn" [disabled]="! userFormGroup.valid"> Add </button>
+  <button class="btn btn-primary addRoleBtn" [disabled]="! userFormGroup.valid"> Login </button>
 </form>
