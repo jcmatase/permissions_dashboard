@@ -10,6 +10,7 @@ import { AuthService } from '../services/auth.service';
 export class LoginComponent implements OnInit {
 
   userFormGroup: FormGroup;
+  loading = false;
 
   constructor(private formBuilder: FormBuilder, private Auth: AuthService) { 
   }
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit {
 
   loginUser() {
     this.Auth.getUserDetails(this.username.value, this.password.value);
+    this.loading = this.Auth.loading;
     console.log("username: " + this.username.value, "password: " + this.password.value);
   }
 
