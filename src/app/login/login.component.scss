@@ -1,10 +1,21 @@
-.input-size {
-    width: 15%;
-    margin: auto;
+.matTitle {
+  margin-top: 20px;
 }
+
 h2 {
   text-align: center;
 }
 .formContent {
     text-align: center;
-  }
+    margin: 0;
+    top: 50%;
+}
+
+.centerContent {
+  margin: 0;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}

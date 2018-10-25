@@ -1,27 +1,30 @@
 <h2 class="matTitle" mat-dialog-title>Login</h2>
 
-<form class="formContent" [formGroup]="userFormGroup" (ngSubmit)="loginUser()">
+<div class="centerContent">
 
-  <div class="form-group">
-    <label for="username" class="label-control">Username</label>
-    <input formControlName="username" class="form-control input-size" floating-label autofocus required>
-    <div *ngIf="username.invalid && username.touched">
-      <div *ngIf="username.errors.required">
-        <span style="color:red" ng-show="myForm.pin.$error.pattern">Username is required</span>
-      </div>
-    </div>
-  </div>
+  <form class="formContent" [formGroup]="userFormGroup" (ngSubmit)="loginUser()">
 
-
-  <div class="form-group">
-      <label for="password" class="label-control">Password</label>
-      <input type="password" formControlName="password" class="form-control input-size" required>
-      <div *ngIf="password.invalid && password.touched">
-        <div *ngIf="password.errors.required">
-          <span style="color:red" ng-show="myForm.pin.$error.pattern">Password is required</span>
+    <div class="form-group">
+      <label for="username" class="label-control">Username</label>
+      <input formControlName="username" class="form-control input-size" floating-label autofocus required>
+      <div *ngIf="username.invalid && username.touched">
+        <div *ngIf="username.errors.required">
+          <span style="color:red" ng-show="myForm.pin.$error.pattern">Username is required</span>
         </div>
       </div>
     </div>
 
-  <button class="btn btn-primary addRoleBtn" [disabled]="! userFormGroup.valid"> Login </button>
-</form>
+
+    <div class="form-group">
+        <label for="password" class="label-control">Password</label>
+        <input type="password" formControlName="password" class="form-control input-size" required>
+        <div *ngIf="password.invalid && password.touched">
+          <div *ngIf="password.errors.required">
+            <span style="color:red" ng-show="myForm.pin.$error.pattern">Password is required</span>
+          </div>
+        </div>
+      </div>
+
+    <button class="btn btn-primary addRoleBtn" [disabled]="! userFormGroup.valid"> Login </button>
+  </form>
+</div>
