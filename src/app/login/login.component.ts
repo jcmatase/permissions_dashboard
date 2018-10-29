@@ -35,9 +35,16 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser() {
-    this.Auth.getUserDetails(this.username.value, this.password.value);
+    this.Auth.getUserDetails(this.username.value, this.password.value)
+      .subscribe(
+        data => {
+          console.warn('data is ' + data );
+        },
+        error => {
+          console.error("Error trying to login");
+        })
+
     this.loading = this.Auth.loading;
-    console.log("username: " + this.username.value, "password: " + this.password.value);
   }
 
 

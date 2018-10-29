@@ -1,8 +1,11 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed, ComponentFixture, inject } from '@angular/core/testing';
 
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
+  let service: AuthService;
+  let fixture: ComponentFixture<AuthService>;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [AuthService]

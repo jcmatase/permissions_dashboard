@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpModule} from "@angular/http";
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
@@ -35,7 +35,7 @@ import { AuthService } from '../app/services/auth.service';
   imports: [
     BrowserAnimationsModule,
     FormsModule, ReactiveFormsModule,
-    HttpClientModule,
+    HttpModule,
     ComponentsModule,
     RouterModule,
     AppRoutingModule,

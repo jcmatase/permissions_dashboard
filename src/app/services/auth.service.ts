@@ -1,30 +1,33 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Http, Headers, Response } from '@angular/http';
+import 'rxjs/add/operator/map'
 
 @Injectable()
 export class AuthService {
-  private baseURL = 'api/users/authenticate';
+  private baseURL = 'http://localhost:8080/master-api/login';
   success = 0;
   loading = false;
   result = {};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: Http) { }
 
-  getUserDetails(username, password) {
-    //post these details to API server return user info if correct
-    return this.http.post(this.baseURL, {username, password
-    }).subscribe(data => {
-      console.log(data, "is what we got from the server");
-      this.success = 1;
-      this.loading = false;
-      this.result = data;
-      //localStorage.setItem('currentUser', JSON.stringify(user));
-    },
-    error => {
-      this.success = 0;
-      this.loading = false;
-      this.result = {};
-    });
+  getUserDetails(username: string, password: string) {
+    return this.http.post( this.baseURL, { username: username, password: password })
+        .map((response: Response) => {
+            // login successful
+            console.error('No user Error');
+            let user = response.json();
+            if (user) {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('currentUser', JSON.stringify(user));
+            }else{
+                console.log('No user Error');
+            }
+            return user;
+        },
+        error => {
+            console.log('Error' + error);
+        });
   }
 
   logout() {
