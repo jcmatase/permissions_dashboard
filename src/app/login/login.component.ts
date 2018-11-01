@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     this.Auth.getUserDetails(this.username.value, this.password.value)
       .subscribe(
         data => {
-          console.warn('data is ' + data );
+          console.warn('Login ok');
         },
         error => {
           console.error("Error trying to login");
