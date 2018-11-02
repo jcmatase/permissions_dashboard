@@ -9,6 +9,7 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './login/auth.guard';
 import { MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatCheckboxModule, MatSelectModule} from '@angular/material';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -55,7 +56,7 @@ import { AuthService } from '../app/services/auth.service';
     AddRoleComponent, EditRoleComponent, RemoveRoleComponent, LoginComponent
   ],
   providers: [
-    AuthService
+    AuthService, AuthGuard
   ],
   bootstrap: [AppComponent],
   entryComponents: [

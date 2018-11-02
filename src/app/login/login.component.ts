@@ -52,9 +52,10 @@ export class LoginComponent implements OnInit {
   }
 
   private validateloginMsgToDisplay(validResponse, response){
+    var user = this.username.value;
     if(validResponse){
       if(response.data && response.data.status === "success" && response.data.token){
-        this.showNotification('top', 'right', "User: ", "", "has been logged in", "alert alert-success alert-with-icon");
+        this.showNotification('top', 'right', "User: ", user, " has been logged in", "alert alert-success alert-with-icon");
         this.redirectToUserspage();
       }
       if(response.data && response.data.status === "failure" && response.data.message === "Invalid User / Password"){
@@ -68,7 +69,6 @@ export class LoginComponent implements OnInit {
 
 
   loginUser() {
-    var user = this.username.value;
     this.Auth.getUserDetails(this.username.value, this.password.value)
       .subscribe(
         data => {
