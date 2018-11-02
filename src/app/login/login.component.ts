@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
+
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -34,11 +35,15 @@ export class LoginComponent implements OnInit {
     return this.userFormGroup.get('password');
   }
 
+
   loginUser() {
     this.Auth.getUserDetails(this.username.value, this.password.value)
       .subscribe(
         data => {
           console.warn('Login ok');
+          //this.showNotification('top', 'right', "User: ", "Test", "Test 2", "alert alert-success alert-with-icon");
+          // classType = "alert alert-warning alert-with-icon";
+          // classType = "alert alert-success alert-with-icon";
         },
         error => {
           console.error("Error trying to login");

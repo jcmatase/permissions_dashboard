@@ -15,9 +15,9 @@ export class AuthService {
     return this.http.post( this.baseURL, { user: username, password: password })
         .map((response: Response) => {
             // login successful
-            let data = JSON.parse(response["_body"]);
-            if(data && data.data.success && data.data.user && data.data.JWT){
-                localStorage.setItem('currentUser', JSON.stringify({"user" : data.data.user, "token" : data.data.JWT}));
+            let responseBody = JSON.parse(response["_body"]);
+            if(responseBody.data && responseBody.data.status === "success" && responseBody.data.token){
+                localStorage.setItem('currentUser', JSON.stringify({"user" : responseBody.data.user, "token" : responseBody.data.token}));
             }
             else{
                 console.error("Invalid response");
