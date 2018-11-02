@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './login/login.component';
 import { MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatCheckboxModule, MatSelectModule} from '@angular/material';
-
+import { ToastrModule } from 'ngx-toastr';
 
 // Modals
 import { AddUserComponent } from '../app/modals/add-user/add-user.component';
@@ -40,7 +40,8 @@ import { AuthService } from '../app/services/auth.service';
     RouterModule,
     AppRoutingModule,
     MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatCheckboxModule, MatSelectModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    ToastrModule.forRoot()
   ],
   schemas: [ 
     NO_ERRORS_SCHEMA 

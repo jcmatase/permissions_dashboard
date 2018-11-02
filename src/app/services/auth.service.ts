@@ -18,9 +18,11 @@ export class AuthService {
             let responseBody = JSON.parse(response["_body"]);
             if(responseBody.data && responseBody.data.status === "success" && responseBody.data.token){
                 localStorage.setItem('currentUser', JSON.stringify({"user" : responseBody.data.user, "token" : responseBody.data.token}));
+                return response;
             }
             else{
                 console.error("Invalid response");
+                return response;
             }
         },
         error => {

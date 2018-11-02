@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
 
 import { AuthService } from '../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'login-app',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   userFormGroup: FormGroup;
   loading = false;
 
-  constructor(private formBuilder: FormBuilder, private Auth: AuthService) { 
+  constructor(private toastr: ToastrService, private formBuilder: FormBuilder, private Auth: AuthService) { 
   }
 
   ngOnInit() {
@@ -35,18 +36,43 @@ export class LoginComponent implements OnInit {
     return this.userFormGroup.get('password');
   }
 
+  private showNotification(from, align, msg1, boldMsg, msg2, classType) {
+    this.toastr.success('<span class="now-ui-icons ui-1_bell-53"></span>' + msg1 + '<b>' + boldMsg + '</b> ' + msg2 , '', {
+      timeOut: 2000,
+      closeButton: true,
+      enableHtml: true,
+      toastClass: classType,
+      positionClass: 'toast-' + from + '-' +  align
+      //toastClass: "alert alert-success alert-with-icon",
+    });
+  }
+
+  private validateloginMsgToDisplay(validResponse, response){
+    if(validResponse){
+      if(response.data && response.data.status === "success" && response.data.token){
+        this.showNotification('top', 'right', "User: ", "", "has been logged in", "alert alert-success alert-with-icon");
+      }
+      if(response.data && response.data.status === "failure" && response.data.message === "Invalid User / Password"){
+        this.showNotification('top', 'right', "Failure: ", "", "Invalid User / Password", "alert alert-warning alert-with-icon");
+      }
+    }
+    else{
+      this.showNotification('top', 'right', "Failure: ", "", "Invalid Request", "alert alert-danger alert-with-icon");
+    }
+  }
+
 
   loginUser() {
+    var user = this.username.value;
     this.Auth.getUserDetails(this.username.value, this.password.value)
       .subscribe(
         data => {
           console.warn('Login ok');
-          //this.showNotification('top', 'right', "User: ", "Test", "Test 2", "alert alert-success alert-with-icon");
-          // classType = "alert alert-warning alert-with-icon";
-          // classType = "alert alert-success alert-with-icon";
+          this.validateloginMsgToDisplay(true, JSON.parse(data["_body"]));
         },
         error => {
           console.error("Error trying to login");
+          this.validateloginMsgToDisplay(false, null);
         })
 
     this.loading = this.Auth.loading;
