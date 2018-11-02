@@ -1,4 +1,5 @@
-import { Component, OnInit, Inject, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
 
 import { AuthService } from '../services/auth.service';
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   userFormGroup: FormGroup;
   loading = false;
 
-  constructor(private toastr: ToastrService, private formBuilder: FormBuilder, private Auth: AuthService) { 
+  constructor(private toastr: ToastrService, private router: Router, private formBuilder: FormBuilder, private Auth: AuthService) { 
   }
 
   ngOnInit() {
@@ -43,14 +44,18 @@ export class LoginComponent implements OnInit {
       enableHtml: true,
       toastClass: classType,
       positionClass: 'toast-' + from + '-' +  align
-      //toastClass: "alert alert-success alert-with-icon",
     });
+  }
+
+  private redirectToUserspage(){
+    this.router.navigate(['/users']);
   }
 
   private validateloginMsgToDisplay(validResponse, response){
     if(validResponse){
       if(response.data && response.data.status === "success" && response.data.token){
         this.showNotification('top', 'right', "User: ", "", "has been logged in", "alert alert-success alert-with-icon");
+        this.redirectToUserspage();
       }
       if(response.data && response.data.status === "failure" && response.data.message === "Invalid User / Password"){
         this.showNotification('top', 'right', "Failure: ", "", "Invalid User / Password", "alert alert-warning alert-with-icon");

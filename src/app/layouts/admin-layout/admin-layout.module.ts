@@ -11,7 +11,6 @@ import { PermissionCategoryComponent } from '../../permission_category/permissio
 import { RolesComponent } from '../../roles/roles.component';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [
@@ -21,8 +20,7 @@ import { ToastrModule } from 'ngx-toastr';
     MatIconModule,
     FormsModule,
     ChartsModule,
-    NgbModule,
-    ToastrModule.forRoot()
+    NgbModule
   ],
   declarations: [
     UsersComponent,
