@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {HttpModule} from "@angular/http";
+import { HttpModule } from "@angular/http";
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './login/auth.guard';
 import { MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatCheckboxModule, MatSelectModule} from '@angular/material';
 import { ToastrModule } from 'ngx-toastr';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 // Modals
 import { AddUserComponent } from '../app/modals/add-user/add-user.component';
@@ -41,6 +42,7 @@ import { AuthService } from '../app/services/auth.service';
     RouterModule,
     AppRoutingModule,
     MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatCheckboxModule, MatSelectModule,
+    Ng4LoadingSpinnerModule.forRoot(),
     NgbModule.forRoot(),
     ToastrModule.forRoot()
   ],

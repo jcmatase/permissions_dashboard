@@ -4,6 +4,8 @@ import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms"
 
 import { AuthService } from '../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'login-app',
@@ -15,7 +17,8 @@ export class LoginComponent implements OnInit {
   userFormGroup: FormGroup;
   loading = false;
 
-  constructor(private toastr: ToastrService, private router: Router, private formBuilder: FormBuilder, private Auth: AuthService) { 
+  constructor(private spinnerService: Ng4LoadingSpinnerService, private toastr: ToastrService, private router: Router, 
+              private formBuilder: FormBuilder, private Auth: AuthService) { 
   }
 
   ngOnInit() {
@@ -67,21 +70,21 @@ export class LoginComponent implements OnInit {
       this.showNotification('top', 'right', "Failure: ", "", "Invalid Request", "alert alert-danger alert-with-icon");
     }
   }
-
-
+  
   loginUser() {
+    this.spinnerService.show();
     this.Auth.getUserDetails(this.username.value, this.password.value)
       .subscribe(
         data => {
+          this.spinnerService.hide();
           console.warn('Login ok');
           this.validateloginMsgToDisplay(true, JSON.parse(data["_body"]));
         },
         error => {
+          this.spinnerService.hide();
           console.error("Error trying to login");
           this.validateloginMsgToDisplay(false, null);
         })
-
-    this.loading = this.Auth.loading;
   }
 
 

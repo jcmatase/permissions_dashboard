@@ -6,7 +6,6 @@ import 'rxjs/add/operator/map'
 export class AuthService {
   private baseURL = '/master-api/login';
   success = 0;
-  loading = false;
   result = {};
 
   constructor(private http: Http) { }

@@ -1,4 +1,5 @@
 <h2 class="matTitle" mat-dialog-title>Login</h2>
+<ng4-loading-spinner> </ng4-loading-spinner>
 
 <div class="centerContent">
 
@@ -25,6 +26,6 @@
         </div>
       </div>
 
-    <button class="btn btn-primary addRoleBtn" [disabled]="! userFormGroup.valid"> Login </button>
+    <button class="btn btn-primary" [disabled]="! userFormGroup.valid"> Login </button>
   </form>
 </div>
